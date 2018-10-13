@@ -3,7 +3,7 @@ import "./Header.css";
 
 const Header = () => (
   <header className="jumbotron text-center">
-    <h1>Fix the City</h1>
+    <h1>Less Mess</h1>
   </header>
 );
 
