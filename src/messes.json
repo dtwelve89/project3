@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Garbage",
+    "location": {
+      "long": -122.104787,
+      "lat": 37.401646,
+      "street": "California Street"
+    },
+    "description": "paper cups",
+    "timestamp": "",
+    "image": "",
+    "levelOfConcern": "",
+    "sensitive": false,
+    "resolved": false
+  },
+  {
+    "title": "Needles",
+    "location": {
+      "long": -122.397044,
+      "lat": 37.790181,
+      "street": "Mission Street"
+    },
+    "description": "used needles",
+    "timestamp": "",
+    "image": "",
+    "levelOfConcern": "high",
+    "sensitive": true,
+    "resolved": false
+  },
+  {
+    "title": "Used needle on Union",
+    "location": {
+      "long": -122.397044,
+      "lat": 37.790181,
+      "street": "Union Street"
+    },
+    "description": "used needle in grass",
+    "timestamp": "",
+    "image": "",
+    "levelOfConcern": "high",
+    "sensitive": true,
+    "resolved": true
+  },
+  {
+    "title": "trashed bicycle",
+    "location": {
+      "long": -122.22815,
+      "lat": 37.484778,
+      "street": "El Camino"
+    },
+    "description": "bicycle frame, very rusty",
+    "timestamp": "",
+    "image": "",
+    "levelOfConcern": "high",
+    "sensitive": false,
+    "resolved": true
+  }
+]
