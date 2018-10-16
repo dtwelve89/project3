@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Header from "../../components/Header";
 import Mess from "../../components/Mess";
 import messes from "../../messes.json"
 
@@ -12,7 +11,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Header />
         {this.state.messes.map(mess => (
           <Mess
             key = {mess.title}
