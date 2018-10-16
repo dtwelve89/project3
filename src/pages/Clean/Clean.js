@@ -1,16 +1,23 @@
 import React, { Component } from "react";
 import Header from "../../components/Header";
+import Navbar from "../../components/Navbar"
+import MapApp from "../../components/Maps";
 
 
 class Clean extends Component {
   state = {
-    test:0
+    ID: "",
+    location: "",
+    SensitiveWaste: true,
+    resolved: true
   };
 
   render() {
     return (
       <div>
         <Header />
+        <Navbar />
+        <MapApp />
       </div>
     );
   }
