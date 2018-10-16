@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Header from "../../components/Header";
-import Navbar from "../../components/Navbar"
 import MapApp from "../../components/Maps";
 
 
@@ -15,8 +13,6 @@ class Clean extends Component {
   render() {
     return (
       <div>
-        <Header />
-        <Navbar />
         <MapApp />
       </div>
     );

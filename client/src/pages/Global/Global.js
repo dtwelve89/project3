@@ -10,7 +10,6 @@ class Global extends Component {
   render() {
     return (
       <div>
-        <Header />
       </div>
     );
   }
