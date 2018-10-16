@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MapApp from "../../components/Maps";
 
 
+
 class Clean extends Component {
   state = {
     ID: "",
@@ -9,6 +10,13 @@ class Clean extends Component {
     SensitiveWaste: true,
     resolved: true
   };
+
+
+
+  //handle button click for messes then display particular chosen mess to clean. Toggle boolean to true when clean button is hit.
+
+ 
+
 
   render() {
     return (
