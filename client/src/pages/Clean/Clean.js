@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MapApp from "../../components/Maps";
-
+import Mess from "../../components/Mess"
 
 
 class Clean extends Component {
@@ -22,7 +22,9 @@ class Clean extends Component {
     return (
       <div>
         <MapApp />
+        <Mess />
       </div>
+      
     );
   }
 }
