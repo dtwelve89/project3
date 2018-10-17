@@ -7,8 +7,11 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   devServer: {
-    disableHostCheck: true,
-    host: '0.0.0.0',
-    port: 3000
-  }
+    compress: true,
+    inline: true,
+    port: '8080',
+    allowedHosts: [
+        '.amazonaws.com'
+    ]
+  },
 };
