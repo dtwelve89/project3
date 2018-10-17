@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { Input, TextArea, FormBtn } from "../../components/Form";
+import Container from "../../components/Container";
+import { Input, TextArea, FormBtn, Option } from "../../components/Form";
 
 
 class Report extends Component {
   state = {
+    category: "Report Mess",
     title:"",
     location:"",
-    description:"",
-    levelOfConcern:""
+    levelOfConcern:"",
+    description:""
+    // sensitive:""
   };
 
   handleInputChange = event => {
@@ -20,12 +23,13 @@ class Report extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.title && this.state.author) {
+    console.log("Reported!")
+    if (this.state.title && this.state.location) {
       API.saveMess({
         title: this.state.title,
         location: this.state.location,
-        description: this.state.description,
-        levelOfConcern: this.state.levelOfConcern
+        levelOfConcern: this.state.levelOfConcern,
+        description: this.state.description
       })
         .then(res => this.loadMesses())
         .catch(err => console.log(err));
@@ -35,38 +39,48 @@ class Report extends Component {
   render() {
     return (
       <div>
-        <form>
-          <Input
-            value={this.state.title}
-            onChange={this.handleInputChange}
-            name="title"
-            placeholder="Title (required)"
-          />
-          <Input
-            value={this.state.location}
-            onChange={this.handleInputChange}
-            name="location"
-            placeholder="Location (required)"
-          />
-          <TextArea
-                value={this.state.description}
-                onChange={this.handleInputChange}
-                name="description"
-                placeholder="Description (Optional)"
-              />
-          <Input
-            value={this.state.levelOfConcern}
-            onChange={this.handleInputChange}
-            name="levelOfConcern"
-            placeholder="Level of Concern (Optional)"
-          />
-          <FormBtn
-            disabled={!(this.state.title && this.state.location)}
-            onClick={this.handleFormSubmit}
-          >
+        <Container
+        category={this.state.category}
+        >
+          <form>
+            <Input
+              value={this.state.title}
+              onChange={this.handleInputChange}
+              name="title"
+              placeholder="Title (required)"
+            />
+            <Input
+              value={this.state.location}
+              onChange={this.handleInputChange}
+              name="location"
+              placeholder="Location (required)"
+            />
+            <Input
+              value={this.state.levelOfConcern}
+              onChange={this.handleInputChange}
+              name="levelOfConcern"
+              placeholder="Level of Concern (Optional)"
+            />
+            <TextArea
+              value={this.state.description}
+              onChange={this.handleInputChange}
+              name="description"
+              placeholder="Description (Optional)"
+            />
+            {/* <Option
+              value={this.state.sensitive}
+              onChange={this.handleInputChange}
+              name="sensitive"
+              placeholder="Hazardous Needle (Optional)"
+            /> */}
+            <FormBtn
+              disabled={!(this.state.title && this.state.location)}
+              onClick={this.handleFormSubmit}
+            >
             Report Mess
-          </FormBtn>
-        </form>
+            </FormBtn>
+          </form>
+        </Container>
       </div>
     );
   }
