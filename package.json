@@ -15,7 +15,7 @@
     "heroku-postbuild": "yarn build"
   },
   "engines": {
-    "node": "8.9.4"
+    "node": "8.11.1"
   },
   "author": "",
   "license": "ISC",
