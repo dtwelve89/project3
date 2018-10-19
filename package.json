@@ -15,7 +15,7 @@
     "heroku-postbuild": "yarn build"
   },
   "engines": {
-    "node": "8.11.1",
+    "node": "10.11.0",
     "yarn": "1.10.0"
   },
   "author": "",

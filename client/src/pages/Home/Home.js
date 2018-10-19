@@ -1,14 +1,26 @@
 import React, { Component } from "react";
+import API from "../../utils/API";
 import Header from "../../components/Header";
 import Mess from "../../components/Mess";
-import messes from "../../messes.json"
+// import messes from "../../messes.json"
 
 class Home extends Component {
   state = {
-    messes: messes,
-    test:0
+    messes: []
   };
 
+  componentDidMount() {
+    this.loadMesses();
+  }
+
+  loadMesses = () => {
+    API.getMesses()
+      .then(res =>
+        // console.log(res)
+        this.setState({ messes: res.data })
+      )
+      .catch(err => console.log(err));
+  };
   render() {
     return (
       <div>
@@ -16,13 +28,14 @@ class Home extends Component {
         {this.state.messes.map(mess => (
           <Mess
             key = {mess.title}
-            image = {mess.image}
-            description = {mess.description}
+            // image = {mess.image}
             title = {mess.title}
-            location = {mess.location.street}
-            date = {mess.timestamp}
+            location = {mess.location}
+            levelOfConcern = {mess.levelOfConcern}
+            description = {mess.description}
+            timestamp = {mess.timestamp}
             sensitive = {mess.sensitive}
-            resolved = {mess.resolved}
+            // resolved = {mess.resolved}
           />
         ))}
       </div>
