@@ -18,7 +18,7 @@ const App = () => (
       <Wrapper>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/authentication" component={Authentication} />
+          <Route exact path="/api/account/signin" component={Authentication} />
           <Route exact path="/clean" component={Clean} />
           <Route exact path="/global" component={Global} />
           <Route exact path="/report" component={Report} />
