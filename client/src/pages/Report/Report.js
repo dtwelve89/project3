@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import Container from "../../components/Container";
-import { Input, TextArea, FormBtn, Option } from "../../components/Form";
+import { Input, TextArea, FormBtn} from "../../components/Form";
 
 
 class Report extends Component {
@@ -10,8 +10,8 @@ class Report extends Component {
     title:"",
     location:"",
     levelOfConcern:"",
-    description:""
-    // sensitive:""
+    description:"",
+    sensitive:""
   };
 
   handleInputChange = event => {
@@ -24,14 +24,16 @@ class Report extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("Reported!")
-    if (this.state.title && this.state.location) {
+    if (this.state.title && this.state.location && this.state.levelOfConcern && this.state.sensitive) {
       API.saveMess({
         title: this.state.title,
         location: this.state.location,
         levelOfConcern: this.state.levelOfConcern,
-        description: this.state.description
+        description: this.state.description,
+        sensitive: this.state.sensitive
       })
-        .then(res => this.loadMesses())
+        .then(res => window.location.replace("/"))
+        // .then(res => console.log(res))
         .catch(err => console.log(err));
     }
   };
@@ -59,7 +61,13 @@ class Report extends Component {
               value={this.state.levelOfConcern}
               onChange={this.handleInputChange}
               name="levelOfConcern"
-              placeholder="Level of Concern (Optional)"
+              placeholder="Level of Concern (Required)"
+            />
+            <Input
+              value={this.state.sensitive}
+              onChange={this.handleInputChange}
+              name="sensitive"
+              placeholder="Is this a sensitive item? (Required)"
             />
             <TextArea
               value={this.state.description}
@@ -67,14 +75,8 @@ class Report extends Component {
               name="description"
               placeholder="Description (Optional)"
             />
-            {/* <Option
-              value={this.state.sensitive}
-              onChange={this.handleInputChange}
-              name="sensitive"
-              placeholder="Hazardous Needle (Optional)"
-            /> */}
             <FormBtn
-              disabled={!(this.state.title && this.state.location)}
+              disabled={!(this.state.title && this.state.location && this.state.levelOfConcern && this.state.sensitive)}
               onClick={this.handleFormSubmit}
             >
             Report Mess
