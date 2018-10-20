@@ -6,7 +6,7 @@ const Mess = (props) => (
     <div className="card-body">
       {/* <img src={props.image} alt={props.description}></img> */}
       <ul>
-        <button className="btn btn-secondary float-right" onClick={() => props.onChange(props.id)}>View Mess</button>
+        <button className="btn btn-secondary float-right" onClick={() => props.showModal()}>View Mess</button>
         <li>Title: {props.title}</li>
         <li>ID: {props.id}</li>
         <li>Location: {props.location}</li>
