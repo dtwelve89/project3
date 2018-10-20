@@ -3,6 +3,7 @@ import API from "../../utils/API";
 // import Header from "../../components/Header";
 import MapApp from "../../components/Maps";
 import Mess from "../../components/Mess";
+import { Link } from "react-router-dom";
 
 class Global extends Component {
   state = {
@@ -23,10 +24,10 @@ class Global extends Component {
   };
 
   //Handles Mess View
-  handleView = id => {
-    let url = "/clean?id="+ id;
-    window.location.replace(url);
-  };
+  // handleView = id => {
+  //   let url = "/clean?id="+ id;
+  //   window.location.replace(url);
+  // };
 
   // To find messes 'not yet cleaned' we can map / filter messes from the 'Messes' model/schema against 'Mess ID's from the 'cleaned_messes' model/schema. Really not too sure how to do this in React just yet but can talk to Tutor (not til weds tho)
 
@@ -43,19 +44,21 @@ class Global extends Component {
       <div>
         <MapApp />
         {this.state.messes.map(mess => (
-          <Mess
-            key = {mess.title}
-            id = {mess._id}
-            // image = {mess.image}
-            title = {mess.title}
-            location = {mess.location}
-            levelOfConcern = {mess.levelOfConcern}
-            description = {mess.description}
-            timestamp = {mess.timestamp}
-            sensitive = {mess.sensitive}
-            onChange = {this.handleView}
-            // resolved = {mess.resolved}
-          />
+          <Link to={"/clean/" + mess._id}>
+            <Mess
+              key = {mess.title}
+              id = {mess._id}
+              // image = {mess.image}
+              title = {mess.title}
+              location = {mess.location}
+              levelOfConcern = {mess.levelOfConcern}
+              description = {mess.description}
+              timestamp = {mess.timestamp}
+              sensitive = {mess.sensitive}
+              onChange = {this.handleView}
+              // resolved = {mess.resolved}
+            />
+          </Link>
         ))}
       </div>
     );
