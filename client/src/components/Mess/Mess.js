@@ -2,12 +2,13 @@ import React from "react";
 import "./Mess.css";
 
 const Mess = (props) => (
-  <div className="card mess">
+  <div className="card mess" id={props.id}>
     <div className="card-body">
       {/* <img src={props.image} alt={props.description}></img> */}
       <ul>
-        <button className="btn btn-secondary float-right">View Mess</button>
+        <button className="btn btn-secondary float-right" onClick={() => props.onChange(props.id)}>View Mess</button>
         <li>Title: {props.title}</li>
+        <li>ID: {props.id}</li>
         <li>Location: {props.location}</li>
         <li>Level of Concern: {props.levelOfConcern}</li>
         <li>Reported: {props.timestamp}</li>
