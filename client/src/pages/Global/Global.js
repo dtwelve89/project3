@@ -11,7 +11,7 @@ class Global extends Component {
 
   componentDidMount() {
     this.loadMesses();
-  }
+  };
 
   loadMesses = () => {
     API.getMesses()
@@ -20,6 +20,12 @@ class Global extends Component {
         this.setState({ messes: res.data })
       )
       .catch(err => console.log(err));
+  };
+
+  //Handles Mess View
+  handleView = id => {
+    let url = "/clean?id="+ id;
+    window.location.replace(url);
   };
 
   // To find messes 'not yet cleaned' we can map / filter messes from the 'Messes' model/schema against 'Mess ID's from the 'cleaned_messes' model/schema. Really not too sure how to do this in React just yet but can talk to Tutor (not til weds tho)
@@ -39,6 +45,7 @@ class Global extends Component {
         {this.state.messes.map(mess => (
           <Mess
             key = {mess.title}
+            id = {mess._id}
             // image = {mess.image}
             title = {mess.title}
             location = {mess.location}
@@ -46,6 +53,7 @@ class Global extends Component {
             description = {mess.description}
             timestamp = {mess.timestamp}
             sensitive = {mess.sensitive}
+            onChange = {this.handleView}
             // resolved = {mess.resolved}
           />
         ))}
@@ -53,16 +61,7 @@ class Global extends Component {
     );
   }
 };
-
-        {/* <Link to="/clean" role="button" className="btn btn-link"> Clean this mess!</Link> */}
-
-        {/* When the user clicks into any of the possible uncleaned messes (listed below the map, limited information showing), we want to then bring up the 'Clean' page, which will then allow a user to see all details re: the mess and mark the mess as 'clean' */}
-        
-        {/*     After 'mapping/filtering' out the uncleaned messes, we can go ahead and sort based on either location or time (might be easier for MVP), then run a loop (or some other React-friendly concept) to repeat this for the top 5-10 responses. For each of the messes we are displaying on the page, we would want to show the limited info below, in addition to providing  a link to click through to the 'clean' page (at the bottom) */}
-
-        // link button below not in proper place, but proper syntax for MERN pages, and we will want to link to the cleaning page for each mess listed.
-    
-      /*  Not proper syntax below, but includes paramter for viewing a specific mess based on ID when you click on that mess to view more info/clean. */
-      /* <Link to="/clean/{messID}" role="button" className="btn btn-link"> */
+  
+  // After 'mapping/filtering' out the uncleaned messes, we can go ahead and sort based on either location or time (might be easier for MVP), then run a loop (or some other React-friendly concept) to repeat this for the top 5-10 responses. For each of the messes we are displaying on the page, we would want to show the limited info below, in addition to providing  a link to click through to the 'clean' page (at the bottom)
 
 export default Global;
