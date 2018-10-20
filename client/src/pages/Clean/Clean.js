@@ -1,58 +1,63 @@
 import React, { Component } from "react";
-import API from "../../utils/API";
 import MapApp from "../../components/Maps";
-import Mess from "../../components/Mess"
+import Mess from "../../components/Mess";
+
+//import messes from "../../messes.json";
+import API from "../../utils/API";
+import Modal from "../../components/Modal";
 
 class Clean extends Component {
   state = {
-    id: "5bc92229a433092c0b3fddec",
-    // location: "",
-    // SensitiveWaste: true,
-    // resolved: true
-    mess:[]
-  };
+    show: false,
+    messes: [],
+    resolved: ""
+    };
 
-  //handle button click for messes then display particular chosen mess to clean. Toggle boolean to true when clean button is hit.
+componentDidMount() {
+  this.loadMesses();
+}
 
-  componentDidMount() {
-    // this.getParameterByName();
-    this.loadMess();
-  };
+loadMesses = () => {
+  API.getMesses()
+  .then(res =>
+    this.setState({ messes: res.data, resolved: "" }))
+}
 
-  // getParameterByName = (name, url) => {
-  //   if (!url) url = window.location.href;
-  //   name = name.replace(/[\[\]]/g, '\\$&');
-  //   var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-  //       results = regex.exec(url);
-  //   if (!results) return null;
-  //   if (!results[2]) return '';
-  //   decodeURIComponent(results[2].replace(/\+/g, ' '));
-  // };
 
-  loadMess = id => {
-    API.getMess(this.state.id)
-      .then(res =>
-        // console.log(res)
-        this.setState({ mess: res.data })
-      )
-      .catch(err => console.log(err));
-  };
-
+showModal = () => {
+  console.log('pressed 2')
+  this.setState({
+    ...this.state,
+    show: !this.state.show
+  });
+}
+ 
   render() {
     return (
       <div>
         <MapApp />
-        <Mess
-          key = {this.state.mess.title}
-          // image = {mess.image}
-          title = {this.state.mess.title}
-          location = {this.state.mess.location}
-          levelOfConcern = {this.state.mess.levelOfConcern}
-          description = {this.state.mess.description}
-          timestamp = {this.state.mess.timestamp}
-          sensitive = {this.state.mess.sensitive}
-          // resolved = {mess.resolved}
-        />
+        
+        {this.state.messes.map(mess => (
+          <Mess
+            showModal = {this.showModal.bind(this)}
+            key = {mess.title}
+            image = {mess.image}
+            id = {mess._id}
+            description = {mess.description}
+            title = {mess.title}
+            location = {mess.location}
+            levelofConcern = {mess.levelofConcern}
+            sensitive = {mess.sensitive}
+            resolved = {mess.resolved}
+          />
+          
+        ))}
+        
+        <Modal 
+          onClose={this.showModal}
+          show={this.state.show}>
+          Hello Modal!! Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah, Blah
+        </Modal>
       </div>
       
     );

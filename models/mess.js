@@ -8,7 +8,7 @@ const messSchema = new Schema({
   description: { type: String, required: false },
   sensitive: { type: String, required: true },
   // image: String,
-  // resolved: { type: Boolean, required: false },
+  resolved: { type: Boolean, required: false },
   timestamp: { type: Date, default: Date.now }
 });
 
