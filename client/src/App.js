@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
-import Authentication from "./pages/Authentication";
+import Login from "./pages/Login";
+import Register from "./pages/Login";
 import Clean from "./pages/Clean";
 import Global from "./pages/Global";
 import Report from "./pages/Report";
@@ -18,10 +19,11 @@ const App = () => (
       <Wrapper>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/api/account/signin" component={Authentication} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/clean" component={Clean} />
           <Route exact path="/global" component={Global} />
           <Route exact path="/report" component={Report} />
+          <Route exact path="/register" component={Register} />
         </Switch>
       </Wrapper>
       <Footer />
