@@ -31,6 +31,17 @@ class MapApp extends Component {
         haveUsersLocation:true,
         zoom: 14
       });
+    }, () => {
+      fetch('https://ipapi.co/json')
+      .then(res => res.json())
+      .then(location => {
+        this.setState({
+          location: {
+            lat: location.latitude,
+            lng: location.longitude
+          }
+        })
+      })
     });
   }
 
