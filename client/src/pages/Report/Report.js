@@ -8,11 +8,48 @@ class Report extends Component {
   state = {
     category: "Report Mess",
     title:"",
-    location:"",
+    location: "",
     levelOfConcern:"",
     description:"",
-    sensitive:""
+    sensitive:"",
+    
+      lat: "",
+      lng: ""
+    
   };
+
+  getPosition() {
+    // Simple wrapper
+    return new Promise((res, rej) => {
+        navigator.geolocation.getCurrentPosition(res, rej);
+    })
+    // .then(console.log(res));
+}
+
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.setState({
+        
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        
+        haveUsersLocation:true,
+        zoom: 14
+      });
+    }, () => {
+      fetch('https://ipapi.co/json')
+      .then(res => res.json())
+      .then(location => {
+        this.setState({
+          
+            lat: location.latitude,
+            lng: location.longitude
+          
+        })
+        .then(console.log(this.geoL));
+      })
+    });
+  }
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -30,10 +67,12 @@ class Report extends Component {
         location: this.state.location,
         levelOfConcern: this.state.levelOfConcern,
         description: this.state.description,
-        sensitive: this.state.sensitive
+        sensitive: this.state.sensitive,
+        lat: this.state.lat,
+        lng: this.state.lng
       })
-        .then(res => window.location.replace("/"))
-        // .then(res => console.log(res))
+        // .then(res => window.location.replace("/"))
+        .then(res => console.log(res))
         .catch(err => console.log(err));
     }
   };

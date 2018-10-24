@@ -29,6 +29,8 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "if-env": "^1.0.4",
-    "mongoose": "^5.3.4"
+    "mongoose": "^5.3.4",
+    "react-dom": "^16.5.2",
+    "react-radio-buttons": "^1.2.2"
   }
 }
