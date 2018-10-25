@@ -13,14 +13,14 @@ class Create extends Component {
       password: ''
     };
   }
-  onChange = (e) => {
+  onChange = (event) => {
     const state = this.state
-    state[e.target.name] = e.target.value;
+    state[event.target.name] = event.target.value;
     this.setState(state);
   }
 
-  onSubmit = (e) => {
-    e.preventDefault();
+  onSubmit = (event) => {
+    event.preventDefault();
 
     const { username, password } = this.state;
 
