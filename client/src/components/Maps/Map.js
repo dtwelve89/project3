@@ -77,8 +77,6 @@ class MapApp extends Component {
             </Popup>}
             </Marker>
         ))}
-            
-
       </Map>
     )
   }
