@@ -6,17 +6,24 @@ import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import WebCamModal from '../../components/WebCamModal';
 
 class Report extends Component {
-  state = {
-    category: "Report Mess",
-    title: "",
-    location: "",
-    levelOfConcern: "",
-    description: "",
-    sensitive: "",
-    lat: "",
-    lng: "",
-    show: false
-  };
+  constructor(props) {
+    super(props);
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+
+
+    this.state = {
+      category: "Report Mess",
+      title: "",
+      location: "",
+      levelOfConcern: "",
+      description: "",
+      sensitive: "",
+      lat: "",
+      lng: "",
+      show: false
+    };
+  }
 
   getPosition() {
     // Simple wrapper
@@ -32,16 +39,16 @@ class Report extends Component {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       });
-    // }, () => {
-    //   fetch('https://ipapi.co/json')
-    //     .then(res => res.json())
-    //     .then(location => {
-    //       this.setState({
-    //       lat: location.latitude,
-    //       lng: location.longitude
-    //       })
-    //         .then(console.log(this.geoL));
-    //     })
+      // }, () => {
+      //   fetch('https://ipapi.co/json')
+      //     .then(res => res.json())
+      //     .then(location => {
+      //       this.setState({
+      //       lat: location.latitude,
+      //       lng: location.longitude
+      //       })
+      //         .then(console.log(this.geoL));
+      //     })
     });
   }
 
@@ -110,10 +117,10 @@ class Report extends Component {
             />
             <div>
               <span>Take a picture of that mess!  </span>
-              <button id="showModal" onClick={this.showModal.bind(this)}>Take Picture</button>
+              <button id="showModal" onClick={this.showModal}>Take Picture</button>
               <WebCamModal
                 show={this.state.show}
-                handleClose={this.hideModal.bind(this)}
+                handleClose={this.hideModal}
               ></WebCamModal>
             </div>
 

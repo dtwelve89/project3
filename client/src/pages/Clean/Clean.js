@@ -7,10 +7,16 @@ import API from "../../utils/API";
 import WebCamModal from "../../components/WebCamModal";
 
 class Clean extends Component {
-  state = {
-    show: false,
-    mess: {}
-  };
+  constructor(props) {
+    super(props);
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+
+    this.state = {
+      show: false,
+      mess: {}
+    };
+  }
 
   componentDidMount() {
     API.getMess(this.props.match.params.id)
@@ -51,10 +57,10 @@ class Clean extends Component {
         />
         <div>
           <span>Great Job! Take a picture of the clean spot!   </span>
-          <button id="showModal" onClick={this.showModal.bind(this)}>Take Picture</button>
+          <button id="showModal" onClick={this.showModal}>Take Picture</button>
           <WebCamModal
             show={this.state.show}
-            handleClose={this.hideModal.bind(this)}
+            handleClose={this.hideModal}
           ></WebCamModal>
         </div>
       </div>
