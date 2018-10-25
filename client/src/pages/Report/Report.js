@@ -23,7 +23,7 @@ class Report extends Component {
         navigator.geolocation.getCurrentPosition(res, rej);
     })
     // .then(console.log(res));
-}
+  };
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -48,7 +48,7 @@ class Report extends Component {
         .then(console.log(this.geoL));
       })
     });
-  }
+  };
 
   handleInputChange = event => {
     const { name, value } = event.target;
