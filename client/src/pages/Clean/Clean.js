@@ -6,6 +6,8 @@ import Mess from "../../components/Mess";
 import API from "../../utils/API";
 import Modal from "../../components/Modal";
 
+
+
 class Clean extends Component {
   state = {
     show: false,
@@ -16,14 +18,14 @@ class Clean extends Component {
 componentDidMount() {
   this.loadMesses();
 }
-
+//loads messages
 loadMesses = () => {
   API.getMesses()
   .then(res =>
     this.setState({ messes: res.data, resolved: "" }))
 }
 
-
+//shows modal when view mess button is pressed
 showModal = () => {
   console.log('pressed 2')
   this.setState({

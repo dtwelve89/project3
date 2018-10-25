@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import Container from "../../components/Container";
 import { Input, TextArea, FormBtn} from "../../components/Form";
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
 
 
 class Report extends Component {
@@ -13,9 +12,8 @@ class Report extends Component {
     levelOfConcern:"",
     description:"",
     sensitive:"",
-    
-      lat: "",
-      lng: ""
+    lat: "",
+    lng: ""
     
   };
 
@@ -53,11 +51,10 @@ class Report extends Component {
   }
 
   handleInputChange = event => {
-    console.log(event)
-    // const { name, value } = event.target;
-    // this.setState({
-    //   [name]: value
-    // });
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
   };
 
   handleFormSubmit = event => {
@@ -73,7 +70,7 @@ class Report extends Component {
         lat: this.state.lat,
         lng: this.state.lng
       })
-        // .then(res => window.location.replace("/"))
+        .then(res => window.location.replace("/"))
         .then(res => console.log(res))
         .catch(err => console.log(err));
     }
@@ -98,69 +95,18 @@ class Report extends Component {
               name="location"
               placeholder="Location (required)"
             />
-            <div>Level of concern
-            <RadioGroup onChange={this.handleInputChange} horizontal
-            value={this.state.levelOfConcern || ""}>
-                <RadioButton 
-                name="levelOfConcern"
-                className="rButton" 
-                value="bad"
-                checked={this.state.levelOfConcern === "bad"}
-                
-                >
-                  It is unsightly.
-                </RadioButton>
-                <RadioButton 
-                name="levelOfConcern"
-                className="rButton" 
-                value="disgusting"
-                checked={this.state.levelOfConcern === "disgusting"}
-                
-                >
-                  It is disgusting.
-                </RadioButton>
-                <RadioButton 
-                name="levelOfConcern"
-                className="rButton" 
-                value="terrible"
-                checked={this.state.levelOfConcern === "terrible"}
-                >
-                  It's revolting.
-                </RadioButton>
-
-              </RadioGroup>
-            </div>Are there sensitive materials?
-            <RadioGroup   onChange={this.handleInputChange} horizontal
-            value={this.state.sensitive || ""}>
-              <RadioButton 
+            <Input
+              value={this.state.levelOfConcern}
+              onChange={this.handleInputChange}
+              name="levelOfConcern"
+              placeholder="Level of Concern (Required)"
+            />
+            <Input
+              value={this.state.sensitive}
+              onChange={this.handleInputChange}
               name="sensitive"
-              className="rButton" 
-              value="no"
-              checked={this.state.sensitive === "no"}
-              
-              >
-                No
-                </RadioButton>
-              <RadioButton 
-              name="sensitive"
-              className="rButton" 
-              value="Yes"
-              checked={this.state.sensitive === "Yes"}
-              
-              >
-                Yes
-                </RadioButton>
-              <RadioButton
-              name="sensitive" 
-              className="rButton" 
-              value="biohazard"
-              checked={this.state.sensitive === "biohazard"}
-             
-              >
-                There are biohazardous materials (used needles/syringes.)
-                </RadioButton>
-
-            </RadioGroup>
+              placeholder="Is this a sensitive item? (Required)"
+            />
             <TextArea
               value={this.state.description}
               onChange={this.handleInputChange}
