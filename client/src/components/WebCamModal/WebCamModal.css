@@ -1,0 +1,52 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.3);
+  padding: 50;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-main {
+  padding-top: 10px;
+  position: fixed;
+  width: 400px;
+  height: 540px;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: #fff;
+  border-radius: 5;
+  border: 3px solid black;  
+}
+
+.diplay-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
+.footer {
+  position: relative;
+  bottom: 20;
+  height: 50px;
+}
+
+video 
+ {
+  width: 300px;
+  height: 250px;
+}
+
+#takePhotoCanvas {
+  width: 300px;
+  height: 250px;
+  position: relative;
+}
+

@@ -1,58 +1,52 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import Container from "../../components/Container";
-import { Input, TextArea, FormBtn} from "../../components/Form";
+import { Input, TextArea, FormBtn } from "../../components/Form";
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
-
+import WebCamModal from '../../components/WebCamModal';
 
 class Report extends Component {
   state = {
     category: "Report Mess",
-    title:"",
+    title: "",
     location: "",
-    levelOfConcern:"",
-    description:"",
-    sensitive:"",
-    
-      lat: "",
-      lng: ""
-    
+    levelOfConcern: "",
+    description: "",
+    sensitive: "",
+    lat: "",
+    lng: "",
+    show: false
   };
 
   getPosition() {
     // Simple wrapper
     return new Promise((res, rej) => {
-        navigator.geolocation.getCurrentPosition(res, rej);
+      navigator.geolocation.getCurrentPosition(res, rej);
     })
     // .then(console.log(res));
-}
+  }
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({
-        
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        
-        haveUsersLocation:true,
-        zoom: 14
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
       });
-    }, () => {
-      fetch('https://ipapi.co/json')
-      .then(res => res.json())
-      .then(location => {
-        this.setState({
-          
-            lat: location.latitude,
-            lng: location.longitude
-          
-        })
-        .then(console.log(this.geoL));
-      })
+    // }, () => {
+    //   fetch('https://ipapi.co/json')
+    //     .then(res => res.json())
+    //     .then(location => {
+    //       this.setState({
+    //       lat: location.latitude,
+    //       lng: location.longitude
+    //       })
+    //         .then(console.log(this.geoL));
+    //     })
     });
   }
 
   handleInputChange = event => {
+    event.preventDefault();
     console.log(event)
     // const { name, value } = event.target;
     // this.setState({
@@ -79,11 +73,27 @@ class Report extends Component {
     }
   };
 
+  showModal(event) {
+    event.preventDefault();
+    console.log("state show ", this.state.show);
+    this.setState({
+      show: true
+    });
+  }
+
+  hideModal(event) {
+    event.preventDefault();
+    console.log("state show ", this.state.show);
+    this.setState({
+      show: false
+    });
+  }
+
   render() {
     return (
       <div>
         <Container
-        category={this.state.category}
+          category={this.state.category}
         >
           <form>
             <Input
@@ -98,64 +108,73 @@ class Report extends Component {
               name="location"
               placeholder="Location (required)"
             />
+            <div>
+              <span>Take a picture of that mess!  </span>
+              <button id="showModal" onClick={this.showModal.bind(this)}>Take Picture</button>
+              <WebCamModal
+                show={this.state.show}
+                handleClose={this.hideModal.bind(this)}
+              ></WebCamModal>
+            </div>
+
             <div>Level of concern
             <RadioGroup onChange={this.handleInputChange} horizontal
-            value={this.state.levelOfConcern || ""}>
-                <RadioButton 
-                name="levelOfConcern"
-                className="rButton" 
-                value="bad"
-                checked={this.state.levelOfConcern === "bad"}
-                
+                value={this.state.levelOfConcern || ""}>
+                <RadioButton
+                  name="levelOfConcern"
+                  className="rButton"
+                  value="bad"
+                  checked={this.state.levelOfConcern === "bad"}
+
                 >
                   It is unsightly.
                 </RadioButton>
-                <RadioButton 
-                name="levelOfConcern"
-                className="rButton" 
-                value="disgusting"
-                checked={this.state.levelOfConcern === "disgusting"}
-                
+                <RadioButton
+                  name="levelOfConcern"
+                  className="rButton"
+                  value="disgusting"
+                  checked={this.state.levelOfConcern === "disgusting"}
+
                 >
                   It is disgusting.
                 </RadioButton>
-                <RadioButton 
-                name="levelOfConcern"
-                className="rButton" 
-                value="terrible"
-                checked={this.state.levelOfConcern === "terrible"}
+                <RadioButton
+                  name="levelOfConcern"
+                  className="rButton"
+                  value="terrible"
+                  checked={this.state.levelOfConcern === "terrible"}
                 >
                   It's revolting.
                 </RadioButton>
 
               </RadioGroup>
             </div>Are there sensitive materials?
-            <RadioGroup   onChange={this.handleInputChange} horizontal
-            value={this.state.sensitive || ""}>
-              <RadioButton 
-              name="sensitive"
-              className="rButton" 
-              value="no"
-              checked={this.state.sensitive === "no"}
-              
+            <RadioGroup onChange={this.handleInputChange} horizontal
+              value={this.state.sensitive || ""}>
+              <RadioButton
+                name="sensitive"
+                className="rButton"
+                value="no"
+                checked={this.state.sensitive === "no"}
+
               >
                 No
                 </RadioButton>
-              <RadioButton 
-              name="sensitive"
-              className="rButton" 
-              value="Yes"
-              checked={this.state.sensitive === "Yes"}
-              
+              <RadioButton
+                name="sensitive"
+                className="rButton"
+                value="Yes"
+                checked={this.state.sensitive === "Yes"}
+
               >
                 Yes
                 </RadioButton>
               <RadioButton
-              name="sensitive" 
-              className="rButton" 
-              value="biohazard"
-              checked={this.state.sensitive === "biohazard"}
-             
+                name="sensitive"
+                className="rButton"
+                value="biohazard"
+                checked={this.state.sensitive === "biohazard"}
+
               >
                 There are biohazardous materials (used needles/syringes.)
                 </RadioButton>
@@ -171,7 +190,7 @@ class Report extends Component {
               disabled={!(this.state.title && this.state.location && this.state.levelOfConcern && this.state.sensitive)}
               onClick={this.handleFormSubmit}
             >
-            Report Mess
+              Report Mess
             </FormBtn>
           </form>
         </Container>
