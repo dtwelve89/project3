@@ -1,31 +1,27 @@
 import React, { Component } from "react";
 import MapApp from "../../components/Maps";
 import Mess from "../../components/Mess";
-//import messes from "../../messes.json";
 import API from "../../utils/API";
 // import Modal from "../../components/Modal";
-
-
 
 class Clean extends Component {
   state = {
     show: false,
     mess: {}
-    };
+  };
 
 componentDidMount() {
+  this.loadMess();
+};
 
-  this.loadMesses();
-}
-//loads messages
-loadMesses = () => {
-  API.getMesses()
-  .then(res =>
-    this.setState({ messes: res.data, resolved: "" }))
-}
+// Loads Specific Mess
+loadMess = () => {
+  API.getMess(this.props.match.params.id)
+  .then(res => this.setState({ mess: res.data }))
+  .catch(err => console.log(err));
+};
 
-//shows modal when view mess button is pressed
-
+//Shows Modal when view mess button is pressed
 showModal = () => {
   console.log('pressed 2')
   this.setState({
@@ -33,7 +29,7 @@ showModal = () => {
     show: !this.state.show
   });
 }
- 
+
   render() {
     return (
       <div>
