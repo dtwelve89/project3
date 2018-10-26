@@ -10,9 +10,11 @@ class Clean extends Component {
 
   state = {
     show: false,
-    mess: {}
+    mess: {},
+    imageTaken: {},
+    imageCapture: {}, 
+    cameraOn: false
   };
-
 
   componentDidMount() {
     API.getMess(this.props.match.params.id)
@@ -32,6 +34,48 @@ class Clean extends Component {
     this.setState({
       show: false
     });
+  }
+
+  startCamera = event => {
+    event.preventDefault();
+    let imageCap = {};
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      .then(mediaStream => {
+        this.setState({
+          cameraOn: true
+        });
+        const video = document.querySelector('video')
+        video.srcObject = mediaStream;
+        video.play();
+        const track = mediaStream.getVideoTracks()[0];
+        imageCap = new ImageCapture(track);
+        this.setState({ imageCapture: imageCap });
+
+      })
+      .catch(error => console.log("An error occured! ", error));
+  }
+
+  takePhoto = event => {
+    event.preventDefault();
+    this.state.imageCapture.takePhoto()
+      .then(blob => {
+        return createImageBitmap(blob);
+      })
+      .then(imageBitmap => {
+        const canvas = document.querySelector('#takePhotoCanvas');
+        this.drawCanvas(canvas, imageBitmap);
+        const context = canvas.getContext('2d');
+        context.fillStyle = "#AAA";
+        const image = canvas.toDataURL('image/png', 0.1);
+        this.setState({ imageTaken: image });
+        console.log("this.state.imageTaken ", this.state.imageTaken);
+      })
+      .catch(error => console.log(error));
+  }
+
+  drawCanvas = (canvas, img) => {
+    //canvas.getContext('2d').clearRect(200,200,300,250);
+    canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height, 0, 0, 330, 335);
   }
 
   render() {
@@ -57,6 +101,10 @@ class Clean extends Component {
           <WebCamModal
             show={this.state.show}
             handleClose={this.hideModal}
+            cameraOn={this.state.cameraOn}
+            takePhoto={this.takePhoto}
+            savePhoto={this.savePhoto}
+            startCamera={this.startCamera}
           ></WebCamModal>
         </div>
       </div>

@@ -7,7 +7,7 @@ const messSchema = new Schema({
   levelOfConcern: { type: String, required: true },
   description: { type: String, required: false },
   sensitive: { type: String, required: true },
-  // image: String,
+  image: { type: Buffer, contentType: String },
   resolved: { type: Boolean, required: false },
   timestamp: { type: Date, default: Date.now },
   lat: {type:Number},

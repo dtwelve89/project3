@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import Container from "../../components/Container";
 import { Input, TextArea, FormBtn } from "../../components/Form";
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
+//import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import WebCamModal from '../../components/WebCamModal';
 
 class Report extends Component {
@@ -15,7 +15,10 @@ class Report extends Component {
     sensitive: "",
     lat: "",
     lng: "",
-    show: false
+    show: false,
+    imageTaken: {},
+    imageCapture: {}, 
+    cameraOn: false 
   };
 
 
@@ -66,7 +69,8 @@ class Report extends Component {
         description: this.state.description,
         sensitive: this.state.sensitive,
         lat: this.state.lat,
-        lng: this.state.lng
+        lng: this.state.lng,
+        image: this.state.imageTaken
       })
         // .then(res => window.location.replace("/"))
         .then(res => console.log(res))
@@ -76,7 +80,7 @@ class Report extends Component {
 
   showModal = event => {
     event.preventDefault();
-    console.log("state show ", this.state.show);
+    //console.log("state show ", this.state.show);
     this.setState({
       show: true
     });
@@ -88,6 +92,48 @@ class Report extends Component {
     this.setState({
       show: false
     });
+  }
+
+  startCamera = event => {
+    event.preventDefault();
+    let imageCap = {};
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      .then(mediaStream => {
+        this.setState({
+          cameraOn: true
+        });
+        const video = document.querySelector('video')
+        video.srcObject = mediaStream;
+        video.play();
+        const track = mediaStream.getVideoTracks()[0];
+        imageCap = new ImageCapture(track);
+        this.setState({ imageCapture: imageCap });
+
+      })
+      .catch(error => console.log("An error occured! ", error));
+  }
+
+  takePhoto = event => {
+    event.preventDefault();
+    this.state.imageCapture.takePhoto()
+      .then(blob => {
+        return createImageBitmap(blob);
+      })
+      .then(imageBitmap => {
+        const canvas = document.querySelector('#takePhotoCanvas');
+        this.drawCanvas(canvas, imageBitmap);
+        const context = canvas.getContext('2d');
+        context.fillStyle = "#AAA";
+        const image = canvas.toDataURL('image/png', 0.1);
+        this.setState({imageTaken: image});
+        //console.log("this.state.imageTaken ", this.state.imageTaken);
+      })
+      .catch(error => console.log(error));
+  }
+
+  drawCanvas = (canvas, img) => {
+    //canvas.getContext('2d').clearRect(200,200,300,250);
+    canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height, 0, 0, 330, 335);
   }
 
   render() {
@@ -115,72 +161,24 @@ class Report extends Component {
               <WebCamModal
                 show={this.state.show}
                 handleClose={this.hideModal}
+                cameraOn={this.state.cameraOn}
+                takePhoto={this.takePhoto}
+                savePhoto={this.savePhoto}
+                startCamera={this.startCamera}
               ></WebCamModal>
             </div>
-
-            <div>Level of concern
-            <RadioGroup onChange={this.handleInputChange} horizontal
-                value={this.state.levelOfConcern || ""}>
-                <RadioButton
-                  name="levelOfConcern"
-                  className="rButton"
-                  value="bad"
-                  checked={this.state.levelOfConcern === "bad"}
-
-                >
-                  It is unsightly.
-                </RadioButton>
-                <RadioButton
-                  name="levelOfConcern"
-                  className="rButton"
-                  value="disgusting"
-                  checked={this.state.levelOfConcern === "disgusting"}
-
-                >
-                  It is disgusting.
-                </RadioButton>
-                <RadioButton
-                  name="levelOfConcern"
-                  className="rButton"
-                  value="terrible"
-                  checked={this.state.levelOfConcern === "terrible"}
-                >
-                  It's revolting.
-                </RadioButton>
-
-              </RadioGroup>
-            </div>Are there sensitive materials?
-            <RadioGroup onChange={this.handleInputChange} horizontal
-              value={this.state.sensitive || ""}>
-              <RadioButton
-                name="sensitive"
-                className="rButton"
-                value="no"
-                checked={this.state.sensitive === "no"}
-
-              >
-                No
-                </RadioButton>
-              <RadioButton
-                name="sensitive"
-                className="rButton"
-                value="Yes"
-                checked={this.state.sensitive === "Yes"}
-
-              >
-                Yes
-                </RadioButton>
-              <RadioButton
-                name="sensitive"
-                className="rButton"
-                value="biohazard"
-                checked={this.state.sensitive === "biohazard"}
-
-              >
-                There are biohazardous materials (used needles/syringes.)
-                </RadioButton>
-
-            </RadioGroup>
+            <Input
+              value={this.state.levelOfConcern}
+              onChange={this.handleInputChange}
+              name="levelOfConcern"
+              placeholder="Level of Concern (Required)"
+            />
+            <Input
+              value={this.state.sensitive}
+              onChange={this.handleInputChange}
+              name="sensitive"
+              placeholder="Is this a sensitive item? (Required)"
+            />
             <TextArea
               value={this.state.description}
               onChange={this.handleInputChange}
