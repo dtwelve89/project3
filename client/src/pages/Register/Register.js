@@ -1,50 +1,66 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import './Login.css';
+import API from "../../utils/API";
+import './Register.css';
 
-class Create extends Component {
+class Register extends Component {
+  state = {
+    userName: "",
+    password: "",
+    message: ""
+  };
 
-  constructor() {
-    super();
-    this.state = {
-      username: '',
-      password: ''
-    };
-  }
-  onChange = (event) => {
-    const state = this.state
-    state[event.target.name] = event.target.value;
-    this.setState(state);
-  }
-
-  onSubmit = (event) => {
+  handleInputChange = event => {
     event.preventDefault();
+    // console.log(event)
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
 
-    const { username, password } = this.state;
-
-    axios.post('/api/auth/register', { username, password })
-      .then((result) => {
-        this.props.history.push("/login")
-      });
-  }
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log("Registered!")
+    if (this.state.userName && this.state.password) {
+      API.saveUser({
+        userName: this.state.userName,
+        password: this.state.password
+      })
+        .then(res => console.log(res))
+        // .then(res => window.location.replace("/login"))
+        .catch(err => console.log(err));
+    }
+  };
 
   render() {
-    const { username, password } = this.state;
     return (
       <div className="container">
-        <form className="form-signin" onSubmit={this.onSubmit}>
+        <form className="form-signin">
           <h2 className="form-signin-heading">Register</h2>
           <label htmlFor="inputEmail" className="sr-only">Email address</label>
-          <input type="email" className="form-control" placeholder="Email address" name="username" value={username} onChange={this.onChange} required/>
+          <input className="form-control"
+            type="email"
+            placeholder="Email address"
+            name="userName"
+            value={this.state.userName}
+            onChange={this.handleInputChange}/>
           <label htmlFor="inputPassword" className="sr-only">Password</label>
-          <input type="password" className="form-control" placeholder="Password" name="password" value={password} onChange={this.onChange} required/>
-          <button className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+          <input className="form-control"
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={this.state.password}
+            onChange={this.handleInputChange}/>
+          <button className="btn btn-lg btn-primary btn-block"
+            type="submit"
+            disabled={!(this.state.userName && this.state.password)}
+            onClick={this.handleFormSubmit}>
+              Login
+          </button>
         </form>
       </div>
     );
   }
 }
 
-export default Create;
+export default Register;
