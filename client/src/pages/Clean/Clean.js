@@ -6,7 +6,6 @@ import API from "../../utils/API";
 import WebCamModal from "../../components/WebCamModal";
 
 class Clean extends Component {
-
   state = {
     show: false,
     mess: {},
@@ -15,33 +14,26 @@ class Clean extends Component {
     cameraOn: false
   };
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> SHollatz/Camera
   componentDidMount() {
     API.getMess(this.props.match.params.id)
       .then(res => this.setState({ mess: res.data }))
       .catch(err => console.log(err));
-  }
+  };
 
   showModal = () => {
     console.log("state show ", this.state.show);
     this.setState({
       show: true
     });
-  }
+  };
 
   hideModal = () => {
     console.log("state show ", this.state.show);
     this.setState({
       show: false
     });
-  }
+  };
 
-<<<<<<< HEAD
-=======
   startCamera = event => {
     event.preventDefault();
     let imageCap = {};
@@ -56,10 +48,9 @@ class Clean extends Component {
         const track = mediaStream.getVideoTracks()[0];
         imageCap = new ImageCapture(track);
         this.setState({ imageCapture: imageCap });
-
       })
       .catch(error => console.log("An error occured! ", error));
-  }
+  };
 
   takePhoto = event => {
     event.preventDefault();
@@ -77,13 +68,12 @@ class Clean extends Component {
         console.log("this.state.imageTaken ", this.state.imageTaken);
       })
       .catch(error => console.log(error));
-  }
+  };
 
   drawCanvas = (canvas, img) => {
     //canvas.getContext('2d').clearRect(200,200,300,250);
     canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height, 0, 0, 330, 335);
-  }
->>>>>>> SHollatz/Camera
+  };
 
   render() {
     return (
@@ -115,7 +105,6 @@ class Clean extends Component {
           ></WebCamModal>
         </div>
       </div>
-
     );
   }
 }
