@@ -6,7 +6,7 @@ const Navbar = props => (
 
     <a className="navbar-brand" href="/">Home</a>
 
-    <a href="/authentication">Authentication</a>
+    <a href="/login">SignIn</a>
 
     <a href="/clean">Clean</a>
 

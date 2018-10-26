@@ -15,9 +15,7 @@
     "heroku-postbuild": "yarn build"
   },
   "engines": {
-
-    "node": "10.12.0",
-
+    "node": "8.11.1",
     "yarn": "1.10.0"
   },
   "author": "",
@@ -28,18 +26,18 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "body-parser": "^1.17.2",
-    "express": "^4.15.4",
-    "if-env": "^1.0.4",
-    "mongoose": "^5.3.4",
     "bcryptjs": "*",
+    "body-parser": "^1.17.2",
     "connect-flash": "*",
     "cookie-parser": "^1.4.1",
+    "express": "^4.15.4",
     "express-handlebars": "*",
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
+    "if-env": "^1.0.4",
     "mongodb": "*",
+    "mongoose": "^5.3.4",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
