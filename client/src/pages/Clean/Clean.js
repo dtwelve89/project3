@@ -7,16 +7,12 @@ import API from "../../utils/API";
 import WebCamModal from "../../components/WebCamModal";
 
 class Clean extends Component {
-  constructor(props) {
-    super(props);
-    this.showModal = this.showModal.bind(this);
-    this.hideModal = this.hideModal.bind(this);
 
-    this.state = {
-      show: false,
-      mess: {}
-    };
-  }
+  state = {
+    show: false,
+    mess: {}
+  };
+
 
   componentDidMount() {
     API.getMess(this.props.match.params.id)
@@ -24,14 +20,14 @@ class Clean extends Component {
       .catch(err => console.log(err));
   }
 
-  showModal() {
+  showModal = () => {
     console.log("state show ", this.state.show);
     this.setState({
       show: true
     });
   }
 
-  hideModal() {
+  hideModal = () => {
     console.log("state show ", this.state.show);
     this.setState({
       show: false

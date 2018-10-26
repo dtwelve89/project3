@@ -6,26 +6,33 @@ import API from "../../utils/API";
 class WebCamModal extends React.Component {
 
   state = {
+    cameraOn: false,
     imageCapture: {},
     imageTaken: {},
     imageLoaded: {}
   }
   
-  startCamera() {
+  startCamera = event => {
+    //event.preventDefault();
     let imageCap = {};
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
       .then(mediaStream => {
+        this.setState({
+          cameraOn: true
+        });
         const video = document.querySelector('video')
         video.srcObject = mediaStream;
         video.play();
         const track = mediaStream.getVideoTracks()[0];
         imageCap = new ImageCapture(track);
         this.setState({ imageCapture: imageCap });
+
       })
       .catch(error => console.log("An error occured! ", error));
   }
 
-  onTakePhotoButtonClick() {
+  onTakePhotoButtonClick(event) {
+    event.preventDefault();
     this.state.imageCapture.takePhoto()
       .then(blob => {
         return createImageBitmap(blob);
@@ -40,20 +47,6 @@ class WebCamModal extends React.Component {
       })
       .catch(error => console.log(error));
   }
-
-  // drawCanvas(canvas, img) {
-  //   canvas.width = getComputedStyle(canvas).width.split('px')[0];
-  //   canvas.height = getComputedStyle(canvas).height.split('px')[0];
-  //   console.log("img.width", img.width);
-  //   console.log("img.height", img.height);
-  //   //Math.min returns lowest number as ratio
-  //   let ratio = Math.min(canvas.width / img.width, canvas.height / img.height);
-  //   let x = (canvas.width - img.width * ratio) / 2;
-  //   let y = (canvas.height - img.height * ratio) / 2;
-  //   canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-  //   canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height,
-  //     x, y, img.width * ratio, img.height * ratio);
-  // }
 
   drawCanvas(canvas, img) {
     //canvas.getContext('2d').clearRect(200,200,300,250);
@@ -78,6 +71,9 @@ class WebCamModal extends React.Component {
   render() {
     console.log("this.props.show", this.props.show);
     if (this.props.show) {
+      if (this.state.cameraOn === false) {
+      this.startCamera()
+      }
       return (
         <div className = {this.props.show ? "modal display-block" : "modal display-none"} style={{display:"block"}}>
           <section className="modal-main">
@@ -93,7 +89,6 @@ class WebCamModal extends React.Component {
                 id="takePhotoCanvas"
                 ref={(canvas) => { this.canvas = canvas }}
               ></canvas>
-              <button id="startCamera" onClick={this.startCamera.bind(this)}>Start Camera</button>
               <button id="takePhotoButton" onClick={this.onTakePhotoButtonClick.bind(this)}>Take Photo</button>
               <button id="savePhotoButton" onClick={this.savePhoto.bind(this)}>Save Photo</button>
               <button id="close" onClick={this.props.handleClose.bind(this)}>close</button>

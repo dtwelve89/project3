@@ -6,32 +6,26 @@ import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import WebCamModal from '../../components/WebCamModal';
 
 class Report extends Component {
-  constructor(props) {
-    super(props);
-    this.showModal = this.showModal.bind(this);
-    this.hideModal = this.hideModal.bind(this);
+  state = {
+    category: "Report Mess",
+    title: "",
+    location: "",
+    levelOfConcern: "",
+    description: "",
+    sensitive: "",
+    lat: "",
+    lng: "",
+    show: false
+  };
 
 
-    this.state = {
-      category: "Report Mess",
-      title: "",
-      location: "",
-      levelOfConcern: "",
-      description: "",
-      sensitive: "",
-      lat: "",
-      lng: "",
-      show: false
-    };
-  }
-
-  getPosition() {
-    // Simple wrapper
-    return new Promise((res, rej) => {
-      navigator.geolocation.getCurrentPosition(res, rej);
-    })
-    // .then(console.log(res));
-  }
+  // getPosition() {
+  //   // Simple wrapper
+  //   return new Promise((res, rej) => {
+  //     navigator.geolocation.getCurrentPosition(res, rej);
+  //   })
+  //   // .then(console.log(res));
+  // }
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -80,7 +74,7 @@ class Report extends Component {
     }
   };
 
-  showModal(event) {
+  showModal = event => {
     event.preventDefault();
     console.log("state show ", this.state.show);
     this.setState({
@@ -88,7 +82,7 @@ class Report extends Component {
     });
   }
 
-  hideModal(event) {
+  hideModal = event => {
     event.preventDefault();
     console.log("state show ", this.state.show);
     this.setState({
