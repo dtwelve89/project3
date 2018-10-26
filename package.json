@@ -15,8 +15,10 @@
     "heroku-postbuild": "yarn build"
   },
   "engines": {
-    "node": "8.11.1",
-    "yarn": "1.10.1"
+
+    "node": "10.12.0",
+
+    "yarn": "1.10.0"
   },
   "author": "",
   "license": "ISC",
@@ -40,6 +42,8 @@
     "mongodb": "*",
     "passport": "*",
     "passport-http": "*",
-    "passport-local": "*"
+    "passport-local": "*",
+    "react-dom": "^16.5.2",
+    "react-radio-buttons": "^1.2.2"
   }
 }

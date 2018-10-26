@@ -9,7 +9,9 @@ const messSchema = new Schema({
   sensitive: { type: String, required: true },
   // image: String,
   resolved: { type: Boolean, required: false },
-  timestamp: { type: Date, default: Date.now }
+  timestamp: { type: Date, default: Date.now },
+  lat: {type:Number},
+  lng: {type:Number}
 });
 
 const Mess = mongoose.model("Mess", messSchema);
