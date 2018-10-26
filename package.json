@@ -29,6 +29,17 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "if-env": "^1.0.4",
-    "mongoose": "^5.3.4"
+    "mongoose": "^5.3.4",
+    "bcryptjs": "*",
+    "connect-flash": "*",
+    "cookie-parser": "^1.4.1",
+    "express-handlebars": "*",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
+    "mongodb": "*",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*"
   }
 }
