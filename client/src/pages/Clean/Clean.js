@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import MapApp from "../../components/Maps";
 import Mess from "../../components/Mess";
-//import messes from "../../messes.json";
 import API from "../../utils/API";
 // import Modal from "../../components/Modal";
 import WebCamModal from "../../components/WebCamModal";
@@ -12,6 +11,7 @@ class Clean extends Component {
     show: false,
     mess: {}
   };
+
 
 
   componentDidMount() {
@@ -33,6 +33,7 @@ class Clean extends Component {
       show: false
     });
   }
+
 
   render() {
     return (
