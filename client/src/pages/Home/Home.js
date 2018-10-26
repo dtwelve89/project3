@@ -11,7 +11,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.loadMesses();
-  }
+  };
 
   loadMesses = () => {
     API.getMesses()

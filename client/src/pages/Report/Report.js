@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import Container from "../../components/Container";
-
 import { Input, TextArea, FormBtn } from "../../components/Form";
-//import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import WebCamModal from '../../components/WebCamModal';
-
 
 class Report extends Component {
   state = {
     category: "Report Mess",
     title: "",
     location: "",
-
     levelOfConcern: "",
     description: "",
     sensitive: "",
@@ -24,7 +20,6 @@ class Report extends Component {
     cameraOn: false 
   };
 
-
   // getPosition() {
   //   // Simple wrapper
   //   return new Promise((res, rej) => {
@@ -32,7 +27,6 @@ class Report extends Component {
   //   })
   //   // .then(console.log(res));
   // }
-
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -54,14 +48,12 @@ class Report extends Component {
   };
 
   handleInputChange = event => {
-
     event.preventDefault();
     // console.log(event)
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
-
   };
 
   handleFormSubmit = event => {
@@ -78,8 +70,8 @@ class Report extends Component {
         lng: this.state.lng,
         image: this.state.imageTaken
       })
-        .then(res => window.location.replace("/"))
         .then(res => console.log(res))
+        .then(res => window.location.replace("/"))
         .catch(err => console.log(err));
     }
   };
@@ -90,7 +82,7 @@ class Report extends Component {
     this.setState({
       show: true
     });
-  }
+  };
 
   hideModal = event => {
     event.preventDefault();
@@ -98,7 +90,7 @@ class Report extends Component {
     this.setState({
       show: false
     });
-  }
+  };
 
   startCamera = event => {
     event.preventDefault();
@@ -161,7 +153,6 @@ class Report extends Component {
               name="location"
               placeholder="Location (required)"
             />
-
             <div>
               <span>Take a picture of that mess!  </span>
               <button id="showModal" onClick={this.showModal}>Take Picture</button>
