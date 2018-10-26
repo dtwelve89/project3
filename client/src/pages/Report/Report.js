@@ -174,10 +174,6 @@ class Report extends Component {
                 startCamera={this.startCamera}
               ></WebCamModal>
             </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> SHollatz/Camera
             <Input
               value={this.state.levelOfConcern}
               onChange={this.handleInputChange}
@@ -190,10 +186,6 @@ class Report extends Component {
               name="sensitive"
               placeholder="Is this a sensitive item? (Required)"
             />
-<<<<<<< HEAD
-
-=======
->>>>>>> SHollatz/Camera
             <TextArea
               value={this.state.description}
               onChange={this.handleInputChange}
