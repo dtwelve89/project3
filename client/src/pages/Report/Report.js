@@ -3,7 +3,7 @@ import API from "../../utils/API";
 import Container from "../../components/Container";
 
 import { Input, TextArea, FormBtn } from "../../components/Form";
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
+//import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import WebCamModal from '../../components/WebCamModal';
 
 
@@ -18,7 +18,10 @@ class Report extends Component {
     sensitive: "",
     lat: "",
     lng: "",
-    show: false
+    show: false,
+    imageTaken: {},
+    imageCapture: {}, 
+    cameraOn: false 
   };
 
 
@@ -72,7 +75,8 @@ class Report extends Component {
         description: this.state.description,
         sensitive: this.state.sensitive,
         lat: this.state.lat,
-        lng: this.state.lng
+        lng: this.state.lng,
+        image: this.state.imageTaken
       })
         .then(res => window.location.replace("/"))
         .then(res => console.log(res))
@@ -82,7 +86,7 @@ class Report extends Component {
 
   showModal = event => {
     event.preventDefault();
-    console.log("state show ", this.state.show);
+    //console.log("state show ", this.state.show);
     this.setState({
       show: true
     });
@@ -94,6 +98,48 @@ class Report extends Component {
     this.setState({
       show: false
     });
+  }
+
+  startCamera = event => {
+    event.preventDefault();
+    let imageCap = {};
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+      .then(mediaStream => {
+        this.setState({
+          cameraOn: true
+        });
+        const video = document.querySelector('video')
+        video.srcObject = mediaStream;
+        video.play();
+        const track = mediaStream.getVideoTracks()[0];
+        imageCap = new ImageCapture(track);
+        this.setState({ imageCapture: imageCap });
+
+      })
+      .catch(error => console.log("An error occured! ", error));
+  }
+
+  takePhoto = event => {
+    event.preventDefault();
+    this.state.imageCapture.takePhoto()
+      .then(blob => {
+        return createImageBitmap(blob);
+      })
+      .then(imageBitmap => {
+        const canvas = document.querySelector('#takePhotoCanvas');
+        this.drawCanvas(canvas, imageBitmap);
+        const context = canvas.getContext('2d');
+        context.fillStyle = "#AAA";
+        const image = canvas.toDataURL('image/png', 0.1);
+        this.setState({imageTaken: image});
+        //console.log("this.state.imageTaken ", this.state.imageTaken);
+      })
+      .catch(error => console.log(error));
+  }
+
+  drawCanvas = (canvas, img) => {
+    //canvas.getContext('2d').clearRect(200,200,300,250);
+    canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height, 0, 0, 330, 335);
   }
 
   render() {
@@ -122,9 +168,16 @@ class Report extends Component {
               <WebCamModal
                 show={this.state.show}
                 handleClose={this.hideModal}
+                cameraOn={this.state.cameraOn}
+                takePhoto={this.takePhoto}
+                savePhoto={this.savePhoto}
+                startCamera={this.startCamera}
               ></WebCamModal>
             </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> SHollatz/Camera
             <Input
               value={this.state.levelOfConcern}
               onChange={this.handleInputChange}
@@ -137,7 +190,10 @@ class Report extends Component {
               name="sensitive"
               placeholder="Is this a sensitive item? (Required)"
             />
+<<<<<<< HEAD
 
+=======
+>>>>>>> SHollatz/Camera
             <TextArea
               value={this.state.description}
               onChange={this.handleInputChange}
