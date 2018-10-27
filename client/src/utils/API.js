@@ -9,6 +9,9 @@ export default {
   getMess: function(id) {
     return axios.get("/api/messes/" + id);
   },
+  updateMess: function(messData) {
+    return axios.put("/api/messes/" + messData.id, messData)
+  },
   // Deletes the mess with the given id
   deleteMess: function(id) {
     return axios.delete("/api/messes/" + id);
