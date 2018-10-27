@@ -24,14 +24,14 @@ class Global extends Component {
   };
 
   loadImage = (mess) => {
-    if (mess.image) {
-      const imageBuffer = mess.image.data;
+    if (mess.imageMess) {
+      const imageBuffer = mess.imageMess.data;
       const convertStoredImage = imageBuffer.map(part =>
         String.fromCharCode(part));
       const imageString = convertStoredImage.join('');
       return imageString;
     } else {
-      return "../../images/man_in_trash.jpg"
+      return `${window.location.origin}/images/man_in_trash.jpg`
     }
   }
 
@@ -56,7 +56,7 @@ class Global extends Component {
               location = {mess.location}
               levelOfConcern = {mess.levelOfConcern}
               description = {mess.description}
-              timestamp = {mess.timestamp}
+              timestamp = {mess.timestampReport}
               sensitive = {mess.sensitive}
               onChange = {this.handleView}
               // resolved = {mess.resolved}

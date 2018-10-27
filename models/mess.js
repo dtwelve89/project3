@@ -7,9 +7,11 @@ const messSchema = new Schema({
   levelOfConcern: { type: String, required: true },
   description: { type: String, required: false },
   sensitive: { type: String, required: true },
-  image: { type: Buffer, contentType: String },
-  resolved: { type: Boolean, required: false },
-  timestamp: { type: Date, default: Date.now },
+  imageMess: { type: Buffer, contentType: String },
+  imageCleaned: { type: Buffer, contentType: String },
+  resolved: { type: Boolean, default: false, required: false },
+  timestampReport: { type: Date, default: Date.now },
+  timestampCleaned: { type: Date },
   lat: {type:Number},
   lng: {type:Number}
 });

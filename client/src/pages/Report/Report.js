@@ -59,16 +59,7 @@ class Report extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("Reported!")
-    if (this.state.title && this.state.location && this.state.levelOfConcern && this.state.sensitive) {
-      console.log("states and types"); 
-      console.log("typeof this.state.title ", typeof this.state.title); 
-      console.log("typeof this.state.location ", typeof this.state.location);  
-      console.log("typeof this.state.levelOfConcern ", typeof this.state.levelOfConcern); 
-      console.log("typeof this.state.description ", typeof this.state.description); 
-      console.log("typeof this.state.sensitive ", typeof this.state.sensitive); 
-      console.log("typeof this.state.lat ", typeof this.state.lat); 
-      console.log("typeof this.state.lng ", typeof this.state.lng);
-      console.log("typeof this.state.image ", typeof this.state.imageTaken); 
+    if (this.state.title && this.state.location && this.state.levelOfConcern && this.state.sensitive) { 
       API.saveMess({
         title: this.state.title,
         location: this.state.location,
@@ -77,7 +68,8 @@ class Report extends Component {
         sensitive: this.state.sensitive,
         lat: this.state.lat,
         lng: this.state.lng,
-        image: this.state.imageTaken
+        imageMess: this.state.imageTaken,
+        timestampReport: Date.now
       })
         .then(res => console.log(res))
         //.then(res => window.location.replace("/"))
@@ -95,7 +87,7 @@ class Report extends Component {
 
   hideModal = event => {
     event.preventDefault();
-    console.log("state show ", this.state.show);
+    //console.log("state show ", this.state.show);
     this.setState({
       show: false
     });

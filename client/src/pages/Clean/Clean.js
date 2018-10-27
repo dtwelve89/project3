@@ -4,32 +4,39 @@ import Mess from "../../components/Mess";
 import API from "../../utils/API";
 // import Modal from "../../components/Modal";
 import WebCamModal from "../../components/WebCamModal";
+import Container from "../../components/Container";
+import { FormBtn, TextArea} from "../../components/Form";
 
 class Clean extends Component {
 
   state = {
+    category: "Cleaned that Mess!",
+    comment: "",
     show: false,
     mess: {},
     imageTaken: {},
     imageCapture: {}, 
-    cameraOn: false
+    cameraOn: false,
+    imageLoaded: {}
   };
 
   componentDidMount() {
     API.getMess(this.props.match.params.id)
       .then(res => this.setState({ mess: res.data }))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .then(() => this.loadImage());
   }
 
+  // functions for camera
   showModal = () => {
-    console.log("state show ", this.state.show);
+    //console.log("state show ", this.state.show);
     this.setState({
       show: true
     });
   }
 
   hideModal = () => {
-    console.log("state show ", this.state.show);
+    //console.log("state show ", this.state.show);
     this.setState({
       show: false
     });
@@ -67,7 +74,7 @@ class Clean extends Component {
         context.fillStyle = "#AAA";
         const image = canvas.toDataURL('image/png', 0.1);
         this.setState({ imageTaken: image });
-        console.log("this.state.imageTaken ", this.state.imageTaken);
+        //console.log("this.state.imageTaken ", this.state.imageTaken);
       })
       .catch(error => console.log(error));
   }
@@ -77,20 +84,48 @@ class Clean extends Component {
     canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height, 0, 0, 330, 335);
   }
 
-  loadImage = (mess) => {
-    console.log("inside loadImage, mess ", mess);
-    if (mess.image) {
-      const imageBuffer = mess.image.data;
+  loadImage = () => {
+    //console.log("this.state.mess.image", this.state.mess.image);
+    if (this.state.mess.imageMess) {
+      const imageBuffer = this.state.mess.imageMess.data;
       const convertStoredImage = imageBuffer.map(part =>
         String.fromCharCode(part));
       const imageString = convertStoredImage.join('');
-      return imageString;
+      this.setState({imageLoaded : imageString});
     } else {
-      return "../../images/man_in_trash.jpg"
+      this.setState({imageLoaded: `${window.location.origin}/images/man_in_trash.jpg` }) 
     }
   }
 
+  //function for form
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log("Reported as clean!")
+    if (this.state.imageTaken) { 
+      API.updateMess({
+        id: this.state.mess._id,
+        resolved: true,
+        commentCleaned: this.state.comment,
+        imageCleaned: this.state.imageTaken,
+        timestampCleaned: Date.now()
+      })
+        .then(res => console.log(res))
+        //.then(res => window.location.replace("/"))
+        .catch(err => console.log(err));
+    }
+  };
+
+  handleInputChange = event => {
+    event.preventDefault();
+    // console.log(event)
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
   render() {
+    //console.log("this.state.mess", this.state.mess);
     return (
       <div>
         <MapApp />
@@ -98,16 +133,19 @@ class Clean extends Component {
           // showModal= {this.showModal.bind(this)}
           key={this.state.title}
           id={this.state.mess._id}
-          //image = {this.loadImage(this.state.mess.image)}
+          image = {this.state.imageLoaded}
           title={this.state.mess.title}
           location={this.state.mess.location}
           levelOfConcern={this.state.mess.levelOfConcern}
           description={this.state.mess.description}
-          timestamp={this.state.mess.timestamp}
+          timestamp={this.state.mess.timestampReport}
           sensitive={this.state.mess.sensitive}
-        // resolved = {mess.resolved}
+          //resolved = {this.state.mess.resolved}
         />
         <div>
+          <Container
+            category={this.state.category}
+          >
           <span>Great Job! Take a picture of the clean spot!   </span>
           <button id="showModal" onClick={this.showModal}>Take Picture</button>
           <WebCamModal
@@ -118,6 +156,21 @@ class Clean extends Component {
             savePhoto={this.savePhoto}
             startCamera={this.startCamera}
           ></WebCamModal>
+          <br></br><br></br>
+          <TextArea
+              value={this.state.comment}
+              onChange={this.handleInputChange}
+              name="comment"
+              placeholder="Comment (Optional)"
+          >
+          </TextArea>
+          <FormBtn
+              //disabled={!(this.state.title && this.state.location && this.state.levelOfConcern && this.state.sensitive)}
+              onClick={this.handleFormSubmit}
+            >
+              Cleaned Mess!
+            </FormBtn>
+          </Container>
         </div>
       </div>
 
