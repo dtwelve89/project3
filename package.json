@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bcrypt-nodejs": "^0.0.3",
     "bcryptjs": "*",
     "body-parser": "^1.17.2",
     "connect-flash": "*",

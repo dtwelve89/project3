@@ -1,4 +1,5 @@
 import axios from "axios";
+import bcrypt from "bcrypt-nodejs";
 
 export default {
   // Gets all messes
@@ -35,6 +36,10 @@ export default {
   },
   // Saves a user to the database
   saveUser: function(userData) {
+    const saltRounds = 10;
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(userData.password, salt);
+    userData.password = hash;
     return axios.post("/api/users", userData);
   }
 };
