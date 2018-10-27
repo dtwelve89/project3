@@ -93,8 +93,8 @@ class Report extends Component {
     });
   };
 
-  startCamera = event => {
-    event.preventDefault();
+  startCamera = () => {
+    //event.preventDefault();
     let imageCap = {};
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
       .then(mediaStream => {
@@ -163,7 +163,7 @@ class Report extends Component {
                 cameraOn={this.state.cameraOn}
                 takePhoto={this.takePhoto}
                 savePhoto={this.savePhoto}
-                startCamera={this.startCamera}
+                startCamera={() => this.startCamera()}
               ></WebCamModal>
             </div>
             <Input
