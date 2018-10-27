@@ -15,7 +15,8 @@ export default {
   },
   // Saves a mess to the database
   saveMess: function(messData) {
-    return axios.post("/api/messes", messData);
+    console.log("inside saveMess, messData ", messData);
+    return axios.post("/api/messes", messData)
   },
   // Gets all users
   getUsers: function() {

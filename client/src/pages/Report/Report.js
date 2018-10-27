@@ -60,6 +60,15 @@ class Report extends Component {
     event.preventDefault();
     console.log("Reported!")
     if (this.state.title && this.state.location && this.state.levelOfConcern && this.state.sensitive) {
+      console.log("states and types"); 
+      console.log("typeof this.state.title ", typeof this.state.title); 
+      console.log("typeof this.state.location ", typeof this.state.location);  
+      console.log("typeof this.state.levelOfConcern ", typeof this.state.levelOfConcern); 
+      console.log("typeof this.state.description ", typeof this.state.description); 
+      console.log("typeof this.state.sensitive ", typeof this.state.sensitive); 
+      console.log("typeof this.state.lat ", typeof this.state.lat); 
+      console.log("typeof this.state.lng ", typeof this.state.lng);
+      console.log("typeof this.state.image ", typeof this.state.imageTaken); 
       API.saveMess({
         title: this.state.title,
         location: this.state.location,
@@ -71,7 +80,7 @@ class Report extends Component {
         image: this.state.imageTaken
       })
         .then(res => console.log(res))
-        .then(res => window.location.replace("/"))
+        //.then(res => window.location.replace("/"))
         .catch(err => console.log(err));
     }
   };
