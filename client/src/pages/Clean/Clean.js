@@ -42,8 +42,8 @@ class Clean extends Component {
     });
   }
 
-  startCamera = event => {
-    event.preventDefault();
+  startCamera = () => {
+    //event.preventDefault();
     let imageCap = {};
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
       .then(mediaStream => {
@@ -139,7 +139,7 @@ class Clean extends Component {
           levelOfConcern={this.state.mess.levelOfConcern}
           description={this.state.mess.description}
           timestamp={this.state.mess.timestampReport}
-          sensitive={this.state.mess.sensitive}
+          startCamera={() => this.startCamera()}
           //resolved = {this.state.mess.resolved}
         />
         <div>

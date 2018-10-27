@@ -14,9 +14,9 @@ class WebCamModal extends React.Component {
   render() {
     //console.log("this.props.show", this.props.show);
     if (this.props.show) {
-      // if (this.props.cameraOn === false) {
-      // this.props.startCamera()
-      // }
+      if (this.props.cameraOn === false) {
+        this.props.startCamera()
+      }
       return (
         <div className = {this.props.show ? "modal display-block" : "modal display-none"} style={{display:"block"}}>
           <section className="modal-main">
@@ -32,7 +32,6 @@ class WebCamModal extends React.Component {
                 id="takePhotoCanvas"
                 ref={(canvas) => { this.canvas = canvas }}
               ></canvas>
-              <button id="startMediaButton" onClick={this.props.startCamera}>Start Camera</button>
               <button id="takePhotoButton" onClick={this.props.takePhoto}>Take Photo</button>
               <button id="saveAndCloseButton" onClick={this.props.handleClose}>Save Photo and Close</button>
             </div>
