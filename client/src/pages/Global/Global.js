@@ -23,6 +23,18 @@ class Global extends Component {
       .catch(err => console.log(err));
   };
 
+  loadImage = (mess) => {
+    if (mess.image) {
+      const imageBuffer = mess.image.data;
+      const convertStoredImage = imageBuffer.map(part =>
+        String.fromCharCode(part));
+      const imageString = convertStoredImage.join('');
+      return imageString;
+    } else {
+      return "../../images/man_in_trash.jpg"
+    }
+  }
+
   // Not totally confident on the Maps functionality yet, so would like to talk this through with someone in the group who has used this on  a previous project. It would probably be a 'nicer' layout / user experience to have the current uncleaned messes show on a map, which could be clicked into.  (so top 1/2 of screen would be map showing 5-10 'close' messes, bottom 1/2 of screen would be list of those messes that can be clicked on for more info/cleaning page)
 
   // Pseudocode ==>
@@ -39,7 +51,7 @@ class Global extends Component {
             <Mess
               key = {mess.title}
               id = {mess._id}
-              // image = {mess.image}
+              image = {this.loadImage(mess)}
               title = {mess.title}
               location = {mess.location}
               levelOfConcern = {mess.levelOfConcern}
