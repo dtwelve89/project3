@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from "../../utils/API";
 import './Register.css';
+import bcrypt from "bcrypt-nodejs";
 
 class Register extends Component {
   state = {
@@ -18,9 +19,11 @@ class Register extends Component {
     });
   };
 
+
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("Registered!")
+    
     if (this.state.userName && this.state.password) {
       API.saveUser({
         userName: this.state.userName,
@@ -55,7 +58,7 @@ class Register extends Component {
             type="submit"
             disabled={!(this.state.userName && this.state.password)}
             onClick={this.handleFormSubmit}>
-              Login
+              Submit
           </button>
         </form>
       </div>
