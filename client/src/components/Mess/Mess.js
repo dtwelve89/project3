@@ -5,7 +5,7 @@ const Mess = (props) => {
   return (
     <div className="card mess" id={props.id}>
       <div className="card-body">
-        {/* <img src={props.image} alt={props.description}></img> */}
+        <img id="messImage" src={props.image} alt="sight"></img>
         <ul>
           {/* <button className="btn btn-secondary float-right" onClick={() => props.showModal()}>View Mess</button> */}
           <li>Title: {props.title}</li>

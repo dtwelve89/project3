@@ -16,7 +16,7 @@ class Home extends Component {
   loadMesses = () => {
     API.getMesses()
       .then(res => {
-        console.log(res)
+        //console.log(res)
         this.setState({ messes: res.data })
       })
       .catch(err => console.log(err));
@@ -24,7 +24,8 @@ class Home extends Component {
 
   loadImage = (mess) => {
     if (mess.image) {
-      const convertStoredImage = mess.image.map(part =>
+      const imageBuffer = mess.image.data;
+      const convertStoredImage = imageBuffer.map(part =>
         String.fromCharCode(part));
       const imageString = convertStoredImage.join('');
       return imageString;
@@ -40,14 +41,13 @@ class Home extends Component {
         {this.state.messes.map(mess => (
           <Mess
             key={mess.title}
-            // image = {mess.image}
+            image = {this.loadImage(mess)}
             title={mess.title}
             location={mess.location}
             levelOfConcern={mess.levelOfConcern}
             description={mess.description}
             timestamp={mess.timestamp}
             sensitive={mess.sensitive}
-            //image={this.loadImage(mess)}
           // resolved = {mess.resolved}
           />
         ))}
