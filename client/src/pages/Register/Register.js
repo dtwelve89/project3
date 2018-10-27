@@ -1,50 +1,80 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import './Login.css';
+import API from "../../utils/API";
+import './Register.css';
 
-class Create extends Component {
+class Register extends Component {
+  state = {
+    userName: "",
+    password: "",
+    message: ""
+  };
 
-  constructor() {
-    super();
-    this.state = {
-      username: '',
-      password: ''
-    };
-  }
-  onChange = (event) => {
-    const state = this.state
-    state[event.target.name] = event.target.value;
-    this.setState(state);
-  }
-
-  onSubmit = (event) => {
+  handleInputChange = event => {
     event.preventDefault();
+    // console.log(event)
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
 
-    const { username, password } = this.state;
+  // compareEmail = (email) => {
+  //     API.getEmail(email);
+  //     if (email) {
+  //       console.log("User Name already exists");
+  //     }
+  // }
 
-    axios.post('/api/auth/register', { username, password })
-      .then((result) => {
-        this.props.history.push("/login")
-      });
-  }
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log("Registered!");
+
+    //compareEmail(this.state.userName);
+    //  API.getEmail(this.state.userName);
+    //   if (this.state.userName ===  ) {
+    //     console.log("User Name already exists");
+    //   }
+
+    if (this.state.userName && this.state.password) {
+      API.saveUser({
+        userName: this.state.userName,
+        password: this.state.password
+      })
+        .then(res => console.log(res))
+        // .then(res => window.location.replace("/login"))
+        .catch(err => console.log(err));
+    }
+  };
 
   render() {
-    const { username, password } = this.state;
     return (
-      <div class="container">
-        <form class="form-signin" onSubmit={this.onSubmit}>
-          <h2 class="form-signin-heading">Register</h2>
-          <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" class="form-control" placeholder="Email address" name="username" value={username} onChange={this.onChange} required/>
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" class="form-control" placeholder="Password" name="password" value={password} onChange={this.onChange} required/>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+      <div className="container">
+        <form className="form-signin">
+          <h2 className="form-signin-heading">Register</h2>
+          <label htmlFor="inputEmail" className="sr-only">Email address</label>
+          <input className="form-control"
+            type="email"
+            placeholder="Email address"
+            name="userName"
+            value={this.state.userName}
+            onChange={this.handleInputChange}/>
+          <label htmlFor="inputPassword" className="sr-only">Password</label>
+          <input className="form-control"
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={this.state.password}
+            onChange={this.handleInputChange}/>
+          <button className="btn btn-lg btn-primary btn-block"
+            type="submit"
+            disabled={!(this.state.userName && this.state.password)}
+            onClick={this.handleFormSubmit}>
+              Submit
+          </button>
         </form>
       </div>
     );
   }
 }
 
-export default Create;
+export default Register;
