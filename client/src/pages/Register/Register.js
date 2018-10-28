@@ -45,11 +45,7 @@ class Register extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-
     // this.compareEmail(this.state.userName);
-
-  
-
     if (this.state.userName && this.state.password) {
       API.getEmail(this.state.userName)
 
