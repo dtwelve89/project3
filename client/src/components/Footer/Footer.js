@@ -20,8 +20,8 @@ const Footer = () => (
                 <a href="#!">LinkedIn</a>
               </li>
               <li> Sabine
-                <a href="#!">GitHub</a>
-                <a href="#!">LinkedIn</a>
+                <a href="https://github.com/SHollatz">GitHub</a>
+                <a href="https://www.linkedin.com/feed/">LinkedIn</a>
               </li>
               <li> Danny
                 <a href="#!">GitHub</a>
