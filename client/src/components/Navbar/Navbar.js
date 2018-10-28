@@ -4,15 +4,13 @@ import "./Navbar.css";
 const Navbar = props => (
   <nav className="navbar navbar-expand-lg navbar-light bg-light">
 
-        <a className="navbar-brand" href="/">Home</a>
+    <a className="navbar-brand" href="/">Home</a>
 
-        <a href="/authentication">Authentication</a>
+    <a href="/login">SignIn</a>
 
-        <a href="/clean">Clean</a>
+    <a href="/global">Messes</a>
 
-        <a href="/global">Global</a>
-
-        <a href="/report">Report</a>
+    <a href="/report">Report</a>
 
   </nav>
 );

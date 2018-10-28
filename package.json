@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && yarn run start:prod || yarn run start:dev",
+    "server": "node",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"yarn run client\"",
     "client": "cd client && yarn start",
@@ -12,6 +13,10 @@
     "install": "cd client && yarn install",
     "build": "cd client && yarn build",
     "heroku-postbuild": "yarn build"
+  },
+  "engines": {
+    "node": "8.12.0",
+    "yarn": "1.10.0"
   },
   "author": "",
   "license": "ISC",
@@ -21,9 +26,23 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bcrypt-nodejs": "^0.0.3",
+    "bcryptjs": "*",
     "body-parser": "^1.17.2",
+    "connect-flash": "*",
+    "cookie-parser": "^1.4.1",
     "express": "^4.15.4",
+    "express-handlebars": "*",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
     "if-env": "^1.0.4",
-    "mongoose": "^5.3.4"
+    "mongodb": "*",
+    "mongoose": "^5.3.4",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*",
+    "react-dom": "^16.5.2",
+    "react-radio-buttons": "^1.2.2"
   }
 }

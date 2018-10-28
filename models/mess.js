@@ -1,14 +1,19 @@
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const messSchema = new Schema({
   title: { type: String, required: true },
   location: { type: String, required: true },
-  descrition: { type: String, required: true },
-  timestamp: { type: String, required: true },
-  // image: String,
   levelOfConcern: { type: String, required: true },
-  sensitive: { type: Boolean, required: true },
-  resolved: { type: Boolean, required: true }
+  description: { type: String, required: false },
+  sensitive: { type: String, required: true },
+  imageMess: { type: Buffer, contentType: String },
+  imageCleaned: { type: Buffer, contentType: String },
+  resolved: { type: Boolean, default: false, required: false },
+  timestampReport: { type: Date, default: Date.now },
+  timestampCleaned: { type: Date },
+  lat: {type:Number},
+  lng: {type:Number}
 });
 
 const Mess = mongoose.model("Mess", messSchema);

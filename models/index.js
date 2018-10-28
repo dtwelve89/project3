@@ -1,3 +1,4 @@
 module.exports = {
-  Mess: require("./mess")
+  Mess: require("./mess"),
+  User: require("./user")
 };
