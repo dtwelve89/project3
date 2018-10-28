@@ -3,7 +3,7 @@ import "./Mess.css";
 
 const Mess = (props) => {
   return (
-    <div className="card mess" id={props.id}>
+    <div className={props.className === "myMess" ? "card myMess" : "card myResolvedMess"} id={props.id}>
       <div className="card-body">
         <img id="messImage" src={props.image} alt="sight"></img>
         <ul>

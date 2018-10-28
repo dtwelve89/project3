@@ -6,7 +6,8 @@ import Mess from "../../components/Mess";
 
 class Home extends Component {
   state = {
-    messes: []
+    messes: [],
+    resolvedMesses: []
   };
 
   componentDidMount() {
@@ -17,7 +18,23 @@ class Home extends Component {
     API.getMesses()
       .then(res => {
         //console.log(res)
-        this.setState({ messes: res.data })
+        const resolvedMesses = res.data.filter(entry => {
+          // console.log("inside filter resolved");
+          // console.log("entry ", entry);
+          // console.log("entry.resolved ", entry.resolved);
+          return entry.resolved;
+        });
+        //console.log("resolvedMesses ", resolvedMesses);
+        const messes = res.data.filter(entry => {
+          return !(entry.resolved);
+        });
+        //console.log("messes ", messes);
+        this.setState({ 
+          messes: messes,
+          resolvedMesses: resolvedMesses 
+        });
+        // console.log("this.state.messes ", this.state.messes);
+        // console.log("this.state.resolvedMesses ", this.state.messes);
       })
       .catch(err => console.log(err));
   };
@@ -39,9 +56,11 @@ class Home extends Component {
     return (
       <div>
         <Header />
+        <h3 id="headlineMess">Messes, that I have reported:</h3>
         {this.state.messes.map(mess => (
           <Mess
-            key={mess.title}
+            key={mess._id}
+            className='myMess'
             image = {this.loadImage(mess)}
             title={mess.title}
             location={mess.location}
@@ -49,7 +68,21 @@ class Home extends Component {
             description={mess.description}
             timestamp={mess.timestampReport}
             sensitive={mess.sensitive}
-          // resolved = {mess.resolved}
+          />
+          ))}
+          <br></br>
+          <h3 id="headlineCleaned">Messes, I reported, which are cleaned up:</h3>
+          {this.state.resolvedMesses.map(resolvedMess => (
+          <Mess
+            key={resolvedMess._id}
+            className='myResolvedMess'
+            image = {this.loadImage(resolvedMess)}
+            title={resolvedMess.title}
+            location={resolvedMess.location}
+            levelOfConcern={resolvedMess.levelOfConcern}
+            description={resolvedMess.description}
+            timestamp={resolvedMess.timestampReport}
+            sensitive={resolvedMess.sensitive}
           />
         ))}
       </div>
