@@ -16,10 +16,13 @@ class Global extends Component {
 
   loadMesses = () => {
     API.getMesses()
-      .then(res =>
+      .then(res => {
         // console.log(res)
-        this.setState({ messes: res.data })
-      )
+        const messes = res.data.filter(entry => {
+          return !(entry.resolved);
+        });
+        this.setState({ messes: messes })
+      })
       .catch(err => console.log(err));
   };
 
@@ -49,7 +52,8 @@ class Global extends Component {
         {this.state.messes.map(mess => (
           <Link to={"/clean/" + mess._id}>
             <Mess
-              key = {mess.title}
+              key = {mess._id}
+              className = "messes"
               id = {mess._id}
               image = {this.loadImage(mess)}
               title = {mess.title}
