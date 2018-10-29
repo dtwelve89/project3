@@ -54,13 +54,13 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div id="homepage">
         <Header />
         <h3 id="headlineMess">Messes, that I have reported:</h3>
         {this.state.messes.map(mess => (
           <Mess
             key={mess._id}
-            className='myMess'
+            className='messes'
             image = {this.loadImage(mess)}
             title={mess.title}
             location={mess.location}

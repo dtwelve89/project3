@@ -1,19 +1,20 @@
 import React from "react";
 import "./Footer.css";
 
-const Footer = () => (
-  <footer className="page-footer font-small bg-light pt-4">
+const Footer = () => {
+  return (
+  <footer className="page-footer font-small bg-light pt-4 lessmess-footer">
     <div className="container-fluid text-center text-md-left">
       <div className="row">
         <div className="col-md-6 mt-md-0 mt-3">
-          <h6 className="text-uppercase">Footer Content</h6>
-          <p>Less Mess was developed by a team of 5 people. 
-            The links on the left lead you to their GitHub repositories and LinkedIn profils.</p>
+          <h6><span>{'\u00A9'}</span> Less Mess</h6>
           <a href="https://github.com/dtwelve89/project3">Project Repository</a>
         </div>
         <hr className="clearfix w-100 d-md-none pb-3"></hr>
-          <div className="col-md-4 mt-md-0 mt-3">
-            <h6 className="text-uppercase">Contributors</h6>
+          <div className="col-md-1.5 mt-md-0 mt-3">
+            <h6 className="text-uppercase">Contributors:</h6>
+          </div>
+          <div className="col-md-2 mt-md-0 mt-3">
             <ul className="list-unstyled">
               <li> Ramon
                 <a href="#!">GitHub</a>
@@ -27,6 +28,10 @@ const Footer = () => (
                 <a href="#!">GitHub</a>
                 <a href="#!">LinkedIn</a>
               </li>
+            </ul>
+          </div>
+          <div className = "col-md-2 mt-md-0 mt-3">
+            <ul className="list-unstyled">
               <li> Philip
                 <a href="#!">GitHub</a>
                 <a href="#!">LinkedIn</a>
@@ -43,6 +48,6 @@ const Footer = () => (
       </div>
   </footer>
 
-    );
+    )};
 
     export default Footer;
