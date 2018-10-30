@@ -15,7 +15,7 @@
     "heroku-postbuild": "yarn build"
   },
   "engines": {
-    "node": "8.12.0",
+    "node": "10.12.0",
     "yarn": "1.10.0"
   },
   "author": "",
@@ -39,6 +39,7 @@
     "if-env": "^1.0.4",
     "mongodb": "*",
     "mongoose": "^5.3.4",
+    "nightmare": "^3.0.1",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
