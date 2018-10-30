@@ -44,5 +44,9 @@ export default {
     const hash = bcrypt.hashSync(userData.password, salt);
     userData.password = hash;
     return axios.post("/api/users", userData);
+  },
+  submit311: function (syringeData) {
+    console.log("inside API submit311");
+    return axios.post("api/messes/311", syringeData);
   }
 };

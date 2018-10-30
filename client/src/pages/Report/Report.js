@@ -77,6 +77,19 @@ class Report extends Component {
     }
   };
 
+  submitSF311 = event => {
+    event.preventDefault();
+    console.log("inside submitSF311");
+    //if (this.state.sensitive === "yes") {
+      API.submit311({
+        url: this.state.url,
+        searchInputId: this.state.searchInputId
+      })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    //}
+  }
+
   showModal = event => {
     event.preventDefault();
     //console.log("state show ", this.state.show);
@@ -189,6 +202,12 @@ class Report extends Component {
               onClick={this.handleFormSubmit}
             >
               Report Mess
+            </FormBtn>
+            <FormBtn
+              //disabled={!(this.state.sensitive)}
+              onClick={this.submitSF311}
+            >
+              Send to SF311
             </FormBtn>
           </form>
         </Container>
