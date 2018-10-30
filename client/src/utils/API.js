@@ -1,6 +1,10 @@
 import axios from "axios";
 import bcrypt from "bcrypt-nodejs";
 
+// const BASEURLGEO = "https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?app_id=";
+// const APP_ID = "RoDUazFGSDMosNzSItnh";
+// const APP_CODE = "TnrKwZ85CCfy9Lj55fZwuA";
+
 export default {
   // Gets all user-specific messes
   getUserMesses: function(reportedUser) {
@@ -48,5 +52,14 @@ export default {
     const hash = bcrypt.hashSync(userData.password, salt);
     userData.password = hash;
     return axios.post("/api/users", userData);
-  }
+  },
+  submit311: function (syringeData) {
+    console.log("inside API submit311");
+    return axios.post("api/messes/311", syringeData);
+  },
+  // reverseGeocode: function(locationData) {
+  //   console.log("locationData ", locationData);
+  //   const query = `${BASEURLGEO}${APP_ID}&app_code${APP_CODE}&mode=retrieveAddresses&prox=${locationData.lat},${locationData.long}`
+  //   return axios.get(query)
+  // }
 };

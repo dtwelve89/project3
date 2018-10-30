@@ -17,7 +17,8 @@ class Clean extends Component {
     imageTaken: {},
     imageCapture: {}, 
     cameraOn: false,
-    imageLoaded: {}
+    imageLoaded: {},
+    className: "messes"
   };
 
   componentDidMount() {
@@ -102,6 +103,9 @@ class Clean extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("Reported as clean!")
+    this.setState({
+      className: "resolvedMess"
+    })
     if (this.state.imageTaken) { 
       API.updateMess({
         id: this.state.mess._id,
@@ -134,6 +138,7 @@ class Clean extends Component {
           // showModal= {this.showModal.bind(this)}
           key={this.state.title}
           id={this.state.mess._id}
+          className={this.state.className}
           image = {this.state.imageLoaded}
           title={this.state.mess.title}
           location={this.state.mess.location}

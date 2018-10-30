@@ -39,6 +39,7 @@
     "if-env": "^1.0.4",
     "mongodb": "*",
     "mongoose": "^5.3.4",
+    "nightmare": "^3.0.1",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
