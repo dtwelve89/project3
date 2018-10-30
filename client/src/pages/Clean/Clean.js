@@ -23,11 +23,12 @@ class Clean extends Component {
   componentDidMount() {
     API.getMess(this.props.match.params.id)
       .then(res => this.setState({ mess: res.data }))
+      .then(res => console.log(res))
       .catch(err => console.log(err))
       .then(() => this.loadImage());
   }
 
-  // functions for camera
+  // Functions for camera
   showModal = () => {
     //console.log("state show ", this.state.show);
     this.setState({
@@ -97,7 +98,7 @@ class Clean extends Component {
     }
   }
 
-  //function for form
+  //Function for form
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("Reported as clean!")
@@ -113,7 +114,7 @@ class Clean extends Component {
         //.then(res => window.location.replace("/"))
         .catch(err => console.log(err));
     }
-  };
+  }
 
   handleInputChange = event => {
     event.preventDefault();
@@ -122,7 +123,7 @@ class Clean extends Component {
     this.setState({
       [name]: value
     });
-  };
+  }
 
   render() {
     //console.log("this.state.mess", this.state.mess);
@@ -173,7 +174,6 @@ class Clean extends Component {
           </Container>
         </div>
       </div>
-
     );
   }
 }

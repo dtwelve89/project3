@@ -2,6 +2,10 @@ import axios from "axios";
 import bcrypt from "bcrypt-nodejs";
 
 export default {
+  // Gets all user-specific messes
+  getUserMesses: function(reportedUser) {
+    return axios.get("/api/messes/" + reportedUser);
+  },
   // Gets all messes
   getMesses: function() {
     return axios.get("/api/messes");

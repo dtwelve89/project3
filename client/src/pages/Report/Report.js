@@ -17,7 +17,8 @@ class Report extends Component {
     show: false,
     imageTaken: {},
     imageCapture: {}, 
-    cameraOn: false 
+    cameraOn: false,
+    userToken: ""
   };
 
   // getPosition() {
@@ -45,7 +46,11 @@ class Report extends Component {
       //         .then(console.log(this.geoL));
       //     })
     });
-  };
+    console.log(this.props.match.params.id);
+    this.setState({
+      userToken: this.props.match.params.id
+    });
+  }
 
   handleInputChange = event => {
     event.preventDefault();
@@ -54,7 +59,7 @@ class Report extends Component {
     this.setState({
       [name]: value
     });
-  };
+  }
 
   handleFormSubmit = event => {
     event.preventDefault();
@@ -69,13 +74,14 @@ class Report extends Component {
         lat: this.state.lat,
         lng: this.state.lng,
         imageMess: this.state.imageTaken,
-        timestampReport: Date.now
+        timestampReport: Date.now,
+        reportedUser: this.props.match.params.id // user identifier
       })
         .then(res => console.log(res))
-        //.then(res => window.location.replace("/"))
+        .then(res => window.location.replace("/user/" + this.state.userToken))
         .catch(err => console.log(err));
     }
-  };
+  }
 
   showModal = event => {
     event.preventDefault();
@@ -83,7 +89,7 @@ class Report extends Component {
     this.setState({
       show: true
     });
-  };
+  }
 
   hideModal = event => {
     event.preventDefault();
@@ -91,7 +97,7 @@ class Report extends Component {
     this.setState({
       show: false
     });
-  };
+  }
 
   startCamera = () => {
     //event.preventDefault();

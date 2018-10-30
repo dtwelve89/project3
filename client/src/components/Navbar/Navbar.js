@@ -10,8 +10,6 @@ const Navbar = props => (
 
     <a href="/global">Messes</a>
 
-    <a href="/report">Report</a>
-
   </nav>
 );
 

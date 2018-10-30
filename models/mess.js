@@ -13,7 +13,8 @@ const messSchema = new Schema({
   timestampReport: { type: Date, default: Date.now },
   timestampCleaned: { type: Date },
   lat: {type:Number},
-  lng: {type:Number}
+  lng: {type:Number},
+  reportedUser: { type: String}
 });
 
 const Mess = mongoose.model("Mess", messSchema);

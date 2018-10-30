@@ -11,11 +11,14 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    this.loadMesses();
-  };
+    console.log(this.props.match.params.id);
+    let reportedUser = this.props.match.params.id;
+    console.log(reportedUser);
+    this.loadMesses(reportedUser);
+  }
 
-  loadMesses = () => {
-    API.getMesses()
+  loadMesses = user => {
+    API.getUserMesses(user)
       .then(res => {
         //console.log(res)
         const resolvedMesses = res.data.filter(entry => {
@@ -37,9 +40,9 @@ class Home extends Component {
         // console.log("this.state.resolvedMesses ", this.state.messes);
       })
       .catch(err => console.log(err));
-  };
+  }
 
-  loadImage = (mess) => {
+  loadImage = mess => {
     //console.log("inside loadImage mess ", mess);
     if (mess.imageMess) {
       const imageBuffer = mess.imageMess.data;
@@ -52,10 +55,21 @@ class Home extends Component {
     }
   }
 
+  handleFormSubmit = event => {
+    event.preventDefault();
+    window.location.replace("/report/user/" + this.props.match.params.id);
+  }
+
   render() {
     return (
       <div id="homepage">
         <Header />
+        <button className="btn btn-lg btn-primary btn-block"
+            type="submit"
+            onClick={this.handleFormSubmit}
+            >
+            Report a Mess!
+          </button>
         <h3 id="headlineMess">Messes, that I have reported:</h3>
         {this.state.messes.map(mess => (
           <Mess
