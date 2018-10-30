@@ -6,6 +6,10 @@ import bcrypt from "bcrypt-nodejs";
 // const APP_CODE = "TnrKwZ85CCfy9Lj55fZwuA";
 
 export default {
+  // Gets all user-specific messes
+  getUserMesses: function(reportedUser) {
+    return axios.get("/api/messes/" + reportedUser);
+  },
   // Gets all messes
   getMesses: function() {
     return axios.get("/api/messes");

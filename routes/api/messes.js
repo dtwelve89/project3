@@ -6,6 +6,10 @@ const syringeController = require("../../controllers/syringeController");
 router.get("/", messesController.findAll);
 router.post("/", messesController.create);
 
+// Matches with "/api/messes/reportedUser"
+router.route("/:reportedUser")
+  .get(messesController.findByUser)
+
 // Matches with "/api/messes/:id"
 router
   .route("/:id")

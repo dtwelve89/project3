@@ -22,7 +22,7 @@ class Register extends Component {
     this.setState({
       [name]: value
     });
-  };
+  }
 
   // compareEmail = (email) => {
   //   API.getEmail(email)
@@ -42,32 +42,30 @@ class Register extends Component {
   //     .catch(err => console.log(err));
   // }
 
-
   handleFormSubmit = event => {
     event.preventDefault();
     // this.compareEmail(this.state.userName);
     if (this.state.userName && this.state.password) {
       API.getEmail(this.state.userName)
-
-        .then(res => {
+      .then(res => {
+        console.log(res);
+        if (!res.data) {
+          this.setState({
+            validation: true
+          });
           console.log(res);
-          if (!res.data) {
-            this.setState({
-              validation: true
-            });
-            console.log(res);
-            console.log("Validation: " + this.state.validation);
-            console.log("State email/userName " + this.state.userName);
-            console.log("Response userName " + res.data)
-          } else {
-            this.setState({
-              validation: false
-            })
-            console.log("Validation: " + this.state.validation);
-          }
-        })
-        // .catch(err => console.log(err))
-        .then(() => {
+          console.log("Validation: " + this.state.validation);
+          console.log("State email/userName " + this.state.userName);
+          console.log("Response userName " + res.data)
+        } else {
+          this.setState({
+            validation: false
+          })
+          console.log("Validation: " + this.state.validation);
+        }
+      })
+      // .catch(err => console.log(err))
+      .then(() => {
         if (this.state.validation === true) {
           API.saveUser({
             userName: this.state.userName,
@@ -77,17 +75,14 @@ class Register extends Component {
               console.log(res)
               console.log("Registered!");
             })
-            // .then(res => window.location.replace("/login"))
+            .then(res => window.location.replace("/login"))
             .catch(err => console.log(err));
         } else {
           console.log("Email already exist");
         }
-        });
-
+      });
     }
   }
-
-
 
   render() {
     return (
