@@ -1,6 +1,14 @@
+html, body {
+  height: 100%;
+}
+
 body {
   background-image: url("./images/congruent_pentagon.png");
-  background-size: 100%;
+  font:normal 16px/1.6em 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+  min-height: 100%;
+  margin-bottom: -100px; 
+  display: flex;
+  flex-direction: column;
 }
 
 a, a:hover {

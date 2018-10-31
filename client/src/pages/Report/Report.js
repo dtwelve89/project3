@@ -181,7 +181,7 @@ class Report extends Component {
                 value={this.state.location}
                 onChange={this.handleInputChange}
                 name="location"
-                placeholder="Location (required)"
+                placeholder="Location (Required)"
               ></Input>
               <TextArea
                 value={this.state.description}
@@ -201,7 +201,6 @@ class Report extends Component {
       )
     } else {
       return (
-
         <div>
           <Container
             category={this.state.category}
@@ -212,13 +211,13 @@ class Report extends Component {
                 value={this.state.title}
                 onChange={this.handleInputChange}
                 name="title"
-                placeholder="Title (required)"
+                placeholder="Title (Required)"
               />
               <Input
                 value={this.state.location}
                 onChange={this.handleInputChange}
                 name="location"
-                placeholder="Location (required)"
+                placeholder="Location (Required)"
               />
               <div>
                 <span>Take a picture of that mess!  </span>
