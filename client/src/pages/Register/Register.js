@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import API from "../../utils/API";
+import Wrapper from "../../components/Wrapper";
 import './Register.css';
 // import bcrypt from "bcrypt-nodejs";
 
@@ -86,7 +87,7 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="container">
+      <Wrapper>
         <form className="form-signin">
           <h2 className="form-signin-heading">Register</h2>
           <label htmlFor="inputEmail" className="sr-only">Email address</label>
@@ -110,7 +111,7 @@ class Register extends Component {
             Submit
           </button>
         </form>
-      </div>
+      </Wrapper>
     );
   }
 }

@@ -1,6 +1,26 @@
 .lessmess-footer {
-  width: 100%;
+  width: 85%;
   height: 100px;
   font-size: 12px;
-  margin-top: 20px;
+  margin: 300px auto 0 auto;
+}
+
+li a {
+  margin: 5px;
+}
+
+#contributors {
+  font-size: 14px;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+#repo {
+  margin: 0;
+}
+
+@media only screen and (max-width:640px) {
+  #contributors {
+    margin: auto;
+  }
 }

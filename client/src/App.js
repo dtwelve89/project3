@@ -7,6 +7,7 @@ import Global from "./pages/Global";
 import Report from "./pages/Report";
 import Register from "./pages/Register";
 import Navbar from "./components/Navbar";
+import Exterior from "./components/Exterior";
 import Wrapper from "./components/Wrapper";
 import Footer from "./components/Footer";
 import ReportSyringe from "./pages/ReportSyringe";
@@ -14,7 +15,7 @@ import "./App.css";
 
 const App = () => (
   <Router>
-    <div>
+    <Exterior>
       <Navbar />
       <Wrapper>
         <Switch>
@@ -31,7 +32,7 @@ const App = () => (
         </Switch>
       </Wrapper>
       <Footer />
-    </div>
+    </Exterior>
   </Router>
 );
 
