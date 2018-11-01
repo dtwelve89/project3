@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import API from "../../utils/API";
-import Wrapper from "../../components/Wrapper";
 import './Register.css';
 // import bcrypt from "bcrypt-nodejs";
 
