@@ -23,6 +23,7 @@ class Clean extends Component {
 
   componentDidMount() {
     API.getMess(this.props.match.params.id)
+    // .then(res => console.log(res.data.reportedUser))
     .then(res => this.setState({ mess: res.data }))
     .then(() => this.loadImage())
     .catch(err => console.log(err));
@@ -101,6 +102,8 @@ class Clean extends Component {
   //Function for Form
   handleFormSubmit = event => {
     event.preventDefault();
+    // alert("Ahhh yeahhhh. Now that's less mess!")
+    let userToken = this.state.mess.reportedUser
     console.log("Reported as clean!")
     this.setState({
       className: "resolvedMess"
@@ -114,7 +117,7 @@ class Clean extends Component {
         timestampCleaned: Date.now()
       })
         .then(res => console.log(res))
-        .then(res => window.location.replace("/user/"))
+        .then(res => window.location.replace("/user/" + userToken))
         .catch(err => console.log(err));
     }
   }
