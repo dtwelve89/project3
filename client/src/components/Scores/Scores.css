@@ -1,0 +1,11 @@
+#scores {
+  margin-top: 20px;
+  padding: 10px 5px 0 10px;
+  text-align: center;
+  line-height: 2;
+  background-color: #9cfcc9;
+  font-family:"Bungee Inline", cursive;
+  color: #5cb174;
+  text-shadow: 2px 2px #e4f77e;
+  font-size: 20px;
+}
