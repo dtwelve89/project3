@@ -10,7 +10,7 @@ module.exports = {
   reportSyringe: function (req, res) {
   //console.log("inside nightmare, req ", req);
   // deconstruct args
-  //console.log("inside syringeController reportSyringe");
+  // console.log("inside syringeController reportSyringe");
   nightmare
   .goto('https://shollatz.github.io/MockUpPageForProject3/')
   .type('#address-search', req.body.location) // push address

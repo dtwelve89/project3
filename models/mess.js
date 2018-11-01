@@ -6,7 +6,6 @@ const messSchema = new Schema({
   location: { type: String, required: true },
   levelOfConcern: { type: String, required: true },
   description: { type: String, required: false },
-  sensitive: { type: String, required: true },
   imageMess: { type: Buffer, contentType: String },
   imageCleaned: { type: Buffer, contentType: String },
   resolved: { type: Boolean, default: false, required: false },

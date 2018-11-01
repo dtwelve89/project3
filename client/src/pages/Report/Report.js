@@ -12,7 +12,6 @@ class Report extends Component {
     location: "",
     levelOfConcern: "",
     description: "",
-    sensitive: "",
     syringe: false,
     lat: "",
     lng: "",
@@ -23,20 +22,13 @@ class Report extends Component {
     userToken: ""
   };
 
-  // getPosition() {
-  //   // Simple wrapper
-  //   return new Promise((res, rej) => {
-  //     navigator.geolocation.getCurrentPosition(res, rej);
-  //   })
-  //   // .then(console.log(res));
-  // }
-
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       });
+       // Code to Bypass Geolocation
       // }, () => {
       //   fetch('https://ipapi.co/json')
       //     .then(res => res.json())
@@ -66,7 +58,7 @@ class Report extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("Reported!")
-    if (this.state.title && this.state.location && this.state.levelOfConcern && this.state.sensitive) {
+    if (this.state.title && this.state.location && this.state.levelOfConcern) {
       API.saveMess({
         title: this.state.title,
         location: this.state.location,
@@ -77,14 +69,13 @@ class Report extends Component {
         lng: this.state.lng,
         imageMess: this.state.imageTaken,
         timestampReport: Date.now,
-        reportedUser: this.props.match.params.id // user identifier
+        reportedUser: this.props.match.params.id
       })
         .then(res => console.log(res))
         .then(res => window.location.replace("/user/" + this.state.userToken))
         .catch(err => console.log(err));
     }
   }
-
 
   showModal = event => {
     event.preventDefault();
@@ -152,7 +143,7 @@ class Report extends Component {
         >
           <Link to={"/311"}>
             <button className="btn btn-outline-danger btn-block"
-            type="submit">It's a syringe? Click here</button>
+            type="submit">Is it a syringe? Click here</button>
           </Link>
           <br></br>
           <form>
@@ -186,12 +177,6 @@ class Report extends Component {
               name="levelOfConcern"
               placeholder="Level of Concern (Required)"
             />
-            <Input
-              value={this.state.sensitive}
-              onChange={this.handleInputChange}
-              name="sensitive"
-              placeholder="Is this a sensitive item? (Required)"
-            />
             <TextArea
               value={this.state.description}
               onChange={this.handleInputChange}
@@ -199,12 +184,11 @@ class Report extends Component {
               placeholder="Description (Optional)"
             />
             <FormBtn
-              disabled={!(this.state.title && this.state.location && this.state.levelOfConcern && this.state.sensitive)}
+              disabled={!(this.state.title && this.state.location && this.state.levelOfConcern)}
               onClick={this.handleFormSubmit}
             >
               Report Mess
             </FormBtn>
-
           </form>
         </Container>
       </div>

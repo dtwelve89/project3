@@ -53,7 +53,6 @@ class Global extends Component {
               levelOfConcern = {mess.levelOfConcern}
               description = {mess.description}
               timestamp = {mess.timestampReport}
-              sensitive = {mess.sensitive}
               onChange = {this.handleView}
               // resolved = {mess.resolved}
             />

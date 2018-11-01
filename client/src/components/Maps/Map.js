@@ -43,7 +43,7 @@ class MapApp extends Component {
       this.setState({
         messes: res.data
       }))
-      .then(messes => {console.log(this.state.messes)});
+      // .then(messes => {console.log(this.state.messes)});
   }
 
   render() {

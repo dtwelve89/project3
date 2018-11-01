@@ -23,10 +23,9 @@ class Clean extends Component {
 
   componentDidMount() {
     API.getMess(this.props.match.params.id)
-      .then(res => this.setState({ mess: res.data }))
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
-      .then(() => this.loadImage());
+    .then(res => this.setState({ mess: res.data }))
+    .then(() => this.loadImage())
+    .catch(err => console.log(err));
   }
 
   // Functions for camera
@@ -99,7 +98,7 @@ class Clean extends Component {
     }
   }
 
-  //Function for form
+  //Function for Form
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("Reported as clean!")
@@ -115,7 +114,7 @@ class Clean extends Component {
         timestampCleaned: Date.now()
       })
         .then(res => console.log(res))
-        .then(res => window.location.replace("/"))
+        .then(res => window.location.replace("/user/"))
         .catch(err => console.log(err));
     }
   }
@@ -169,7 +168,7 @@ class Clean extends Component {
           >
           </TextArea>
           <FormBtn
-              disabled={!(this.state.imageCleaned)}
+              // disabled={!(this.state.imageCleaned)}
               onClick={this.handleFormSubmit}
             >
               Cleaned Mess!

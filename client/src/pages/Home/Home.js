@@ -13,9 +13,7 @@ class Home extends Component {
 
   componentDidMount() {
     console.log(this.props.match.params.id);
-    let reportedUser = this.props.match.params.id;
-    console.log(reportedUser);
-    this.loadMesses(reportedUser);
+    this.loadMesses(this.props.match.params.id);
   }
 
   loadMesses = user => {
@@ -90,7 +88,6 @@ class Home extends Component {
               levelOfConcern={mess.levelOfConcern}
               description={mess.description}
               timestamp={mess.timestampReport}
-              sensitive={mess.sensitive}
             />
           </Link>
         ))}
@@ -105,7 +102,6 @@ class Home extends Component {
             levelOfConcern={resolvedMess.levelOfConcern}
             description={resolvedMess.description}
             timestamp={resolvedMess.timestampReport}
-            sensitive={resolvedMess.sensitive}
           />
         ))}
       </div>

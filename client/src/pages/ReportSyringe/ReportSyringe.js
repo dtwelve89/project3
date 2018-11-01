@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import Container from "../../components/Container";
 import { Input, TextArea, FormBtn } from "../../components/Form";
-import { Link } from "react-router-dom";
 
 class ReportSyringe extends Component {
   state = {
