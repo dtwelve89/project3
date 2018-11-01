@@ -1,20 +1,20 @@
 #header {
   width: 960px;
   height: 500px;
-  margin: 20px auto 20px auto;
+  margin: 40px auto 20px auto;
   text-align: center;
   position: relative;
   font-family:"Bungee Inline", cursive;
   border-style: solid;
-  border-width: 2px 10px 4px 20px;
-  border-color: #bdf8ce;
+  border-width: 2px 2px 2px 2px;
+  border-color: #eafdd3;
   background-size: cover;
   border-radius: 5px;
   z-index: 1;
 }
 
 #left {
-  width: 595px;
+  width: 600px;
   height: 495px;
   float: left;
   background-image: url("../../images/work_hand.jpg");
@@ -24,7 +24,7 @@
 }
 
 #right {
-  width: 335px;
+  width: 356px;
   height: 495px;
   float: right;
   background-image: url("../../images/hand_light.jpg");

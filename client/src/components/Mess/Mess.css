@@ -2,6 +2,7 @@
   width: 960px;
   background-color: #eafdd3;
   border: 1px solid orange;
+  margin: 10px auto 30px auto;
 }
 
 .resolvedMess {
@@ -9,6 +10,7 @@
   background-color: #aff6ca;
   border: 1px solid #5cb174;
   padding: 5px;
+  margin: 10px auto 30px auto;
 }
 
 #messImage {

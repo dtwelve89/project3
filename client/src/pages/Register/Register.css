@@ -23,6 +23,8 @@ body {
           box-sizing: border-box;
   padding: 10px;
   font-size: 16px;
+  width: 250px;
+  margin: 10px;
 }
 .form-signin .form-control:focus {
   z-index: 2;
@@ -39,4 +41,10 @@ body {
 }
 .form-signin p {
   margin-top: 10px;
+}
+
+#card-register {
+  width: 400px;
+  margin: 40px auto 20px auto;
+  padding-bottom: 20px;
 }
