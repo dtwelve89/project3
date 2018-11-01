@@ -54,8 +54,8 @@ export default {
     return axios.post("/api/users", userData);
   },
   submit311: function (syringeData) {
-    console.log("inside API submit311");
-    return axios.post("api/messes/311", syringeData);
+    //console.log("inside API submit311");
+    return axios.post("api/messes/syringe", syringeData);
   },
   // reverseGeocode: function(locationData) {
   //   console.log("locationData ", locationData);

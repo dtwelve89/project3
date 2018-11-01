@@ -79,7 +79,6 @@ class Home extends Component {
             >
             Report a Mess!
           </button>
-        <h3 id="headlineMess">Messes, that I have reported:</h3>
         {this.state.messes.map(mess => (
           <Link to={"/clean/" + mess._id}>
             <Mess
@@ -96,7 +95,6 @@ class Home extends Component {
           </Link>
         ))}
         <br></br>
-        <h3 id="headlineCleaned">Messes, I reported, which are cleaned up:</h3>
         {this.state.resolvedMesses.map(resolvedMess => (
           <Mess
             key={resolvedMess._id}

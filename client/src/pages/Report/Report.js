@@ -3,6 +3,7 @@ import API from "../../utils/API";
 import Container from "../../components/Container";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import WebCamModal from '../../components/WebCamModal';
+import { Link } from "react-router-dom";
 
 class Report extends Component {
   state = {
@@ -17,7 +18,7 @@ class Report extends Component {
     lng: "",
     show: false,
     imageTaken: {},
-    imageCapture: {}, 
+    imageCapture: {},
     cameraOn: false,
     userToken: ""
   };
@@ -84,32 +85,6 @@ class Report extends Component {
     }
   }
 
-  handleSyringe = event => {
-    event.preventDefault();
-    // API.reverseGeocode({
-    //   lat: this.state.lat, 
-    //   long: this.state.lng
-    // })
-    // .then(res => console.log(res))
-    // .catch(err => console.log(err));
-    this.setState({
-      syringe: true,
-      category: "Report to SF 311"
-    })
-  }
-
-  submitSF311 = event => {
-    event.preventDefault();
-    console.log("inside submitSF311");
-    //if (this.state.sensitive === "yes") {
-    API.submit311({
-      url: this.state.url,
-      searchInputId: this.state.searchInputId
-    })
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    //}
-  }
 
   showModal = event => {
     event.preventDefault();
@@ -170,98 +145,72 @@ class Report extends Component {
   }
 
   render() {
-    if (this.state.syringe) {
-      return (
-        <div>
-          <Container
-            category={this.state.category}
-          >
-            <form>
-              <Input
-                value={this.state.location}
-                onChange={this.handleInputChange}
-                name="location"
-                placeholder="Location (Required)"
-              ></Input>
-              <TextArea
-                value={this.state.description}
-                onChange={this.handleInputChange}
-                name="description"
-                placeholder="Description (Optional)"
-              ></TextArea>
-              <FormBtn
-                //disabled={!(this.state.sensitive)}
-                onClick={this.submitSF311}
-              >
-                Send to SF311
-              </FormBtn>
-            </form>
-          </Container>
-        </div >
-      )
-    } else {
-      return (
-        <div>
-          <Container
-            category={this.state.category}
-          >
-            <button id="syringe" onClick={this.handleSyringe}>It's a syringe!</button>
-            <form>
-              <Input
-                value={this.state.title}
-                onChange={this.handleInputChange}
-                name="title"
-                placeholder="Title (Required)"
-              />
-              <Input
-                value={this.state.location}
-                onChange={this.handleInputChange}
-                name="location"
-                placeholder="Location (Required)"
-              />
-              <div>
-                <span>Take a picture of that mess!  </span>
-                <button id="showModal" onClick={this.showModal}>Take Picture</button>
-                <WebCamModal
-                  show={this.state.show}
-                  handleClose={this.hideModal}
-                  cameraOn={this.state.cameraOn}
-                  takePhoto={this.takePhoto}
-                  savePhoto={this.savePhoto}
-                  startCamera={() => this.startCamera()}
-                ></WebCamModal>
-              </div>
-              <Input
-                value={this.state.levelOfConcern}
-                onChange={this.handleInputChange}
-                name="levelOfConcern"
-                placeholder="Level of Concern (Required)"
-              />
-              <Input
-                value={this.state.sensitive}
-                onChange={this.handleInputChange}
-                name="sensitive"
-                placeholder="Is this a sensitive item? (Required)"
-              />
-              <TextArea
-                value={this.state.description}
-                onChange={this.handleInputChange}
-                name="description"
-                placeholder="Description (Optional)"
-              />
-              <FormBtn
-                disabled={!(this.state.title && this.state.location && this.state.levelOfConcern && this.state.sensitive)}
-                onClick={this.handleFormSubmit}
-              >
-                Report Mess
+    return (
+      <div>
+        <Container
+          category={this.state.category}
+        >
+          <Link to={"/311"}>
+            <button className="btn btn-outline-danger btn-block"
+            type="submit">It's a syringe? Click here</button>
+          </Link>
+          <br></br>
+          <form>
+            <Input
+              value={this.state.title}
+              onChange={this.handleInputChange}
+              name="title"
+              placeholder="Title (Required)"
+            />
+            <Input
+              value={this.state.location}
+              onChange={this.handleInputChange}
+              name="location"
+              placeholder="Location (Required)"
+            />
+            <div>
+              <button className="btn btn-outline-success btn-block" id="showModal" onClick={this.showModal}>Take Picture of that mess!</button>
+              <WebCamModal
+                show={this.state.show}
+                handleClose={this.hideModal}
+                cameraOn={this.state.cameraOn}
+                takePhoto={this.takePhoto}
+                savePhoto={this.savePhoto}
+                startCamera={() => this.startCamera()}
+              ></WebCamModal>
+            </div>
+            <br></br>
+            <Input
+              value={this.state.levelOfConcern}
+              onChange={this.handleInputChange}
+              name="levelOfConcern"
+              placeholder="Level of Concern (Required)"
+            />
+            <Input
+              value={this.state.sensitive}
+              onChange={this.handleInputChange}
+              name="sensitive"
+              placeholder="Is this a sensitive item? (Required)"
+            />
+            <TextArea
+              value={this.state.description}
+              onChange={this.handleInputChange}
+              name="description"
+              placeholder="Description (Optional)"
+            />
+            <FormBtn
+              disabled={!(this.state.title && this.state.location && this.state.levelOfConcern && this.state.sensitive)}
+              onClick={this.handleFormSubmit}
+            >
+              Report Mess
             </FormBtn>
 
-            </form>
-          </Container>
-        </div>
-      );
-    }
+          </form>
+        </Container>
+      </div>
+    );
   }
 }
+
 
 export default Report;

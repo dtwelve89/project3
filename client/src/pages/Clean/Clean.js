@@ -115,7 +115,7 @@ class Clean extends Component {
         timestampCleaned: Date.now()
       })
         .then(res => console.log(res))
-        //.then(res => window.location.replace("/"))
+        .then(res => window.location.replace("/"))
         .catch(err => console.log(err));
     }
   }
@@ -130,13 +130,11 @@ class Clean extends Component {
   }
 
   render() {
-    //console.log("this.state.mess", this.state.mess);
     return (
       <div>
         <MapApp />
         <Mess
-          // showModal= {this.showModal.bind(this)}
-          key={this.state.title}
+          key={this.state.mess._id}
           id={this.state.mess._id}
           className={this.state.className}
           image = {this.state.imageLoaded}
@@ -171,7 +169,7 @@ class Clean extends Component {
           >
           </TextArea>
           <FormBtn
-              //disabled={!(this.state.title && this.state.location && this.state.levelOfConcern && this.state.sensitive)}
+              disabled={!(this.state.imageCleaned)}
               onClick={this.handleFormSubmit}
             >
               Cleaned Mess!
