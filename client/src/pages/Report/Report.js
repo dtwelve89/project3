@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 class Report extends Component {
   state = {
-    category: "Report Mess",
+    category: "Report a Mess!",
     title: "",
     location: "",
     levelOfConcern: "",

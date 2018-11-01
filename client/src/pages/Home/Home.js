@@ -76,7 +76,7 @@ class Home extends Component {
             onClick={this.handleFormSubmit}
             >
             Report a Mess!
-          </button>
+        </button>
         {this.state.messes.map(mess => (
           <Link to={"/clean/" + mess._id}>
             <Mess
@@ -104,6 +104,7 @@ class Home extends Component {
             timestamp={resolvedMess.timestampReport}
           />
         ))}
+        <br></br>
       </div>
     );
   }

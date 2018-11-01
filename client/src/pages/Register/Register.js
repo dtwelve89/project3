@@ -87,9 +87,10 @@ class Register extends Component {
 
   render() {
     return (
-      <Wrapper>
+      <div className="container">
+        <div id="card-register" className="card">
+        <h2 className="form-signin-heading card-header">Register</h2>
         <form className="form-signin">
-          <h2 className="form-signin-heading">Register</h2>
           <label htmlFor="inputEmail" className="sr-only">Email address</label>
           <input className="form-control"
             type="email"
@@ -104,14 +105,15 @@ class Register extends Component {
             name="password"
             value={this.state.password}
             onChange={this.handleInputChange} />
-          <button className="btn btn-lg btn-primary btn-block"
+          <button className="btn btn-lg btn-success btn-block"
             type="submit"
             disabled={!(this.state.userName && this.state.password)}
             onClick={this.handleFormSubmit}>
             Submit
           </button>
         </form>
-      </Wrapper>
+        </div>
+      </div>
     );
   }
 }

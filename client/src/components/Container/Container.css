@@ -1,0 +1,14 @@
+#container {
+  margin: 40px auto 80px auto;
+}
+
+.card-header {
+  background-color: #047aff;
+  color:#f6faf1;
+  font-size: 26px;
+  text-align: center;
+}
+
+.card-body {
+  background-color: #f6faf1;
+}

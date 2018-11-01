@@ -37,7 +37,7 @@ class Login extends Component {
           })
           // const hash = res.data.password;
           // true or false
-          if(res.data) {
+          if (res.data) {
             const hash = res.data.password;
             if (bcrypt.compareSync(this.state.password, hash) === true) {
               this.setState({
@@ -79,35 +79,43 @@ class Login extends Component {
 
   render() {
     return (
-      <Wrapper>
-        <form className="form-signin">
-          <h2 className="form-signin-heading">Please sign in</h2>
-          <label htmlFor="inputEmail" className="sr-only">Email address</label>
-          <input className="form-control"
-            type="email"
-            placeholder="Email address"
-            name="userName"
-            value={this.state.userName}
-            onChange={this.handleInputChange} />
-          <label htmlFor="inputPassword" className="sr-only">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Password"
-            name="password"
-            value={this.state.password}
-            onChange={this.handleInputChange} />
-          <button className="btn btn-lg btn-primary btn-block"
-            type="submit"
-            disabled={!(this.state.userName && this.state.password)}
-            onClick={this.handleFormSubmit}>
-            Login
+      <div className="container">
+        <div id="card-login" className="card">
+          <h2 className="form-signin-heading card-header">Please sign in</h2>
+          <form className="form-signin">
+            {/* {message !== '' &&
+            <div className="alert alert-warning alert-dismissible" role="alert">
+              { message }
+            </div>
+          } */}
+
+            <label htmlFor="inputEmail" className="sr-only">Email address</label>
+            <input className="form-control"
+              type="email"
+              placeholder="Email address"
+              name="userName"
+              value={this.state.userName}
+              onChange={this.handleInputChange} />
+            <label htmlFor="inputPassword" className="sr-only">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Password"
+              name="password"
+              value={this.state.password}
+              onChange={this.handleInputChange} />
+            <button className="btn btn-lg btn-success btn-block"
+              type="submit"
+              disabled={!(this.state.userName && this.state.password)}
+              onClick={this.handleFormSubmit}>
+              Login
           </button>
-          <p>
-            Not a member? <Link to="/register"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Register here</Link>
-          </p>
-        </form>
-      </Wrapper>
+            <p>
+              Not a member? <Link to="/register"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Register here</Link>
+            </p>
+          </form>
+        </div>
+      </div>
     );
   }
 }
