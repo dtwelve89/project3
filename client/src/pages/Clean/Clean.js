@@ -116,7 +116,6 @@ class Clean extends Component {
         imageCleaned: this.state.imageTaken,
         timestampCleaned: Date.now()
       })
-        .then(res => console.log(res))
         .then(res => window.location.replace("/user/" + userToken))
         .catch(err => console.log(err));
     }
@@ -152,8 +151,7 @@ class Clean extends Component {
           <Container
             category={this.state.category}
           >
-          <span>Great Job! Take a picture of the clean spot!   </span>
-          <button id="showModal" onClick={this.showModal}>Take Picture</button>
+          <button id="showModal" className="btn btn-outline-success btn-block" onClick={this.showModal}>Take Picture</button>
           <WebCamModal
             show={this.state.show}
             handleClose={this.hideModal}

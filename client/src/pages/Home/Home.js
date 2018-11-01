@@ -3,7 +3,7 @@ import API from "../../utils/API";
 import Header from "../../components/Header";
 import Mess from "../../components/Mess";
 import { Link } from "react-router-dom";
-// import messes from "../../messes.json"
+import Scores from "../../components/Scores";
 
 class Home extends Component {
   state = {
@@ -12,7 +12,7 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.match.params.id);
+    //console.log(this.props.match.params.id);
     this.loadMesses(this.props.match.params.id);
   }
 
@@ -35,6 +35,8 @@ class Home extends Component {
           messes: messes,
           resolvedMesses: resolvedMesses
         });
+        //console.log("messes.length", messes.length);
+        //console.log("resolvedMesses.length", resolvedMesses.length);
         // console.log("this.state.messes ", this.state.messes);
         // console.log("this.state.resolvedMesses ", this.state.messes);
       })
@@ -68,6 +70,7 @@ class Home extends Component {
   }
 
   render() {
+    if (this.state.messes.length > 0 || this.state.resolvedMesses.length >0) {
     return (
       <div id="homepage">
         <Header />
@@ -75,8 +78,12 @@ class Home extends Component {
             type="submit"
             onClick={this.handleFormSubmit}
             >
-            Report a Mess!
+            Report a new Mess!
         </button>
+        <Scores 
+          reported={this.state.messes.length + this.state.resolvedMesses.length}
+          cleaned={this.state.resolvedMesses.length}
+        ></Scores>
         {this.state.messes.map(mess => (
           <Link to={"/clean/" + mess._id}>
             <Mess
@@ -105,8 +112,23 @@ class Home extends Component {
           />
         ))}
         <br></br>
+        <br></br>
       </div>
     );
+  } else {
+    return (
+      
+      <div id="homepage">
+        <Header />
+        <button className="btn btn-lg btn-primary btn-block"
+            type="submit"
+            onClick={this.handleFormSubmit}
+            >
+            Report a new Mess!
+        </button>
+        </div>
+        )
+  }
   }
 }
 
