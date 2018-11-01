@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import API from "../../utils/API";
 import { Link } from 'react-router-dom';
+import Wrapper from "../../components/Wrapper";
 import './Login.css';
 import bcrypt from "bcrypt-nodejs";
 
@@ -78,13 +79,8 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="container">
+      <Wrapper>
         <form className="form-signin">
-          {/* {message !== '' &&
-            <div className="alert alert-warning alert-dismissible" role="alert">
-              { message }
-            </div>
-          } */}
           <h2 className="form-signin-heading">Please sign in</h2>
           <label htmlFor="inputEmail" className="sr-only">Email address</label>
           <input className="form-control"
@@ -111,7 +107,7 @@ class Login extends Component {
             Not a member? <Link to="/register"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Register here</Link>
           </p>
         </form>
-      </div>
+      </Wrapper>
     );
   }
 }

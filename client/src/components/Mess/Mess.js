@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from 'react-moment';
 import "./Mess.css";
 
 const Mess = (props) => {
@@ -10,7 +11,7 @@ const Mess = (props) => {
           <li>Title: {props.title}</li>
           <li>Location: {props.location}</li>
           <li>Level of Concern: {props.levelOfConcern}</li>
-          <li>Reported: {props.timestamp}</li>
+          <Moment><li>Reported: {props.timestamp}</li></Moment>
           {/* <li>Description: {props.description}</li> */}
         </ul>
 
