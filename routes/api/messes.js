@@ -18,7 +18,7 @@ router
   .delete(messesController.remove);
 
 router
-  .route("/311")
+  .route("/syringe")
   .post(syringeController.reportSyringe);
 
 module.exports = router;

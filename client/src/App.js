@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import Navbar from "./components/Navbar";
 import Wrapper from "./components/Wrapper";
 import Footer from "./components/Footer";
+import ReportSyringe from "./pages/ReportSyringe";
 import "./App.css";
 
 const App = () => (
@@ -26,6 +27,7 @@ const App = () => (
           <Route exact path="/report" component={Report} />
           <Route exact path="/report/user/:id" component={Report} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/311" component={ReportSyringe} />
         </Switch>
       </Wrapper>
       <Footer />
