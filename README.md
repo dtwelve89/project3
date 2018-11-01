@@ -24,7 +24,7 @@
 - [x] Twitter Bootstrap CSS
 
 ### Deployment:
-See the Less Mess deployment on Heroku at: https://nyt-react-app-danny.herokuapp.com/
+See the Less Mess deployment on Heroku at: https://less-mess.herokuapp.com/
 
 ### Team Members:
 - [x] Sabine Hollatz
